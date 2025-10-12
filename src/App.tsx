@@ -17,30 +17,30 @@ interface Milestone {
 const milestones: Milestone[] = [
   {
     id: 1,
-    year: '2017',
-    title: 'High School Graduation & University Journey Begins',
-    shortDescription: 'Graduated high school and began my academic journey in technology',
-    fullDescription: 'Completed high school with honors and embarked on my university education, laying the foundation for my career in technology and innovation. This marked the beginning of my formal education in computer science and engineering.',
+    year: '2020',
+    title: 'Driveway Grad',
+    shortDescription: 'A socially distanced farewell',
+    fullDescription: 'Graduating in 2020 was anything but ordinary. After four unforgettable years, I couldn\'t stand the idea of just receiving our diplomas in the mail, so a few friends and I pitched a new idea to our school board, a driveway graduation. Every student got their own personal ceremony right at home. It was heartfelt, unforgettable, and the perfect way to say goodbye to our high school years.',
     imageUrl: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-blue-500'
   },
   {
     id: 2,
-    year: '2018',
-    title: 'First Programming Projects',
-    shortDescription: 'Developed initial software applications and web projects',
-    fullDescription: 'Began creating my first programming projects, learning various programming languages and frameworks. Built several web applications and software tools that demonstrated my growing technical skills and passion for problem-solving through code.',
+    year: '2020',
+    title: 'Assemblies Crew',
+    shortDescription: 'Redefining what a school assembly could be',
+    fullDescription: 'In grade 12, my friends Andy, Ethan, and I became our school\'s "Assembly Ministers." We produced entire cinematic storylines before every assembly, a four-part series complete with a Christmas special. It was chaotic, hilarious, and surprisingly impactful, bringing together hundreds of students with something to look forward to every month.',
     imageUrl: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-green-500'
   },
   {
     id: 3,
-    year: '2019',
-    title: 'Academic Excellence & Research',
-    shortDescription: 'Achieved academic milestones and began research projects',
-    fullDescription: 'Maintained excellent academic performance while beginning to engage in research projects. Started exploring advanced topics in computer science and began contributing to open-source projects, building a strong foundation for future innovations.',
+    year: '2020',
+    title: 'Second Degree Black Belt',
+    shortDescription: 'Discipline forged through years of training',
+    fullDescription: 'After more than a decade of kickboxing, I earned my second degree black belt. The journey taught me far more than technique. It built my discipline, mental toughness, and respect for growth through repetition. Since then, I have continued to teach and support classes whenever I\'m back at my dojo.',
     imageUrl: 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-purple-500'
@@ -48,62 +48,142 @@ const milestones: Milestone[] = [
   {
     id: 4,
     year: '2020',
-    title: 'Pandemic Adaptation & Remote Learning',
-    shortDescription: 'Adapted to remote learning and continued academic growth',
-    fullDescription: 'Successfully navigated the challenges of remote learning during the pandemic, maintaining academic excellence while developing new skills in remote collaboration and digital communication. This period strengthened my adaptability and resilience.',
+    title: 'Brent and Back Challenge',
+    shortDescription: '162 km of paddling, 22 km of portaging, 0 hours of sleep',
+    fullDescription: 'As part of a charity initiative at Gould Lake Outdoor Centre, our team completed an intense 162 kilometre paddle and 22 kilometre portage in just two days through rain, fog, and pitch darkness. We raised $10,000 to send kids to camp, proving that the hardest challenges are always the most rewarding.',
     imageUrl: 'https://images.pexels.com/photos/3782235/pexels-photo-3782235.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-orange-500'
   },
   {
     id: 5,
-    year: '2021',
-    title: 'Advanced Technical Skills Development',
-    shortDescription: 'Mastered advanced programming languages and frameworks',
-    fullDescription: 'Dedicated significant time to mastering advanced programming languages, frameworks, and development tools. Built complex applications and contributed to meaningful projects that showcased my technical growth and problem-solving abilities.',
+    year: '2020',
+    title: 'Tutoring Company Launch',
+    shortDescription: 'Finding purpose through the pandemic',
+    fullDescription: 'When COVID hit, I saw how much students were struggling. So, instead of heading straight to university, I took a gap year to start a tutoring business that blended academics with cognitive behavioural therapy principles. It grew rapidly, helping over 2,000 students and training 23 tutors. It became the foundation of my journey as an entrepreneur and educator.',
     imageUrl: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-red-500'
   },
   {
     id: 6,
-    year: '2022',
-    title: 'Internship & Industry Experience',
-    shortDescription: 'Gained valuable industry experience through internships',
-    fullDescription: 'Secured and completed internships that provided hands-on experience in the technology industry. Worked on real-world projects, collaborated with professional teams, and gained insights into industry best practices and workflows.',
+    year: '2021-2022',
+    title: 'Gold Duke of Edinburgh Award',
+    shortDescription: 'A journey of service, challenge, and adventure',
+    fullDescription: 'Over a year of volunteering, fitness, and skill development, I earned the Gold Duke of Edinburgh Award. From expeditions to residential projects, it pushed me to grow as a leader, teammate, and individual. It reminded me that consistency and courage create real impact.',
     imageUrl: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-cyan-500'
   },
   {
     id: 7,
-    year: '2023',
-    title: 'Leadership & Project Management',
-    shortDescription: 'Took on leadership roles in academic and personal projects',
-    fullDescription: 'Stepped into leadership roles, managing teams and overseeing complex projects from conception to completion. Developed strong project management skills and learned to balance technical excellence with effective team coordination and communication.',
+    year: '2022',
+    title: 'Photography Business',
+    shortDescription: 'Capturing landscapes, building perspective',
+    fullDescription: 'After years of shooting as a hobby, I launched my own photography business in 2022. I taught myself Photoshop and Lightroom, refined my editing style, and started selling landscape prints inspired by my travels through Banff and beyond. What began as curiosity became a creative outlet and my first taste of entrepreneurship.',
     imageUrl: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-emerald-500'
   },
   {
     id: 8,
-    year: '2024',
-    title: 'Innovation & Entrepreneurship',
-    shortDescription: 'Launched innovative projects and explored entrepreneurial opportunities',
-    fullDescription: 'Began exploring entrepreneurial opportunities and launched innovative projects that addressed real-world problems. Developed business acumen alongside technical skills, creating solutions that demonstrated both technical excellence and market understanding.',
+    year: '2022',
+    title: 'Extracurricular Leadership at McMaster',
+    shortDescription: 'Blending business and engineering',
+    fullDescription: 'In my second year, I founded a club called EC Com to bridge engineers and commerce students through international competitions. I also joined JDCC to strengthen my case competition skills and contributed to McMaster Formula Electric, helping the team combine technical design with strategic business planning. It was the year I learned how collaboration turns ideas into impact.',
     imageUrl: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-indigo-500'
   },
   {
     id: 9,
+    year: '2022',
+    title: 'Custom Gifting Tradition',
+    shortDescription: 'Turning gratitude into craftsmanship',
+    fullDescription: 'Starting in 2022, I began a yearly tradition of creating handmade gifts for people who had a big impact on me. I learned to sew custom blankets for close friends and carve wooden paddles for mentors, each one representing a shared adventure or lesson learned. It became my way of saying thank you in the most personal way possible.',
+    imageUrl: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-pink-500'
+  },
+  {
+    id: 10,
+    year: '2023',
+    title: '3D Printing and Design',
+    shortDescription: 'From prototypes to passion projects',
+    fullDescription: 'After discovering 3D printing in an engineering design course, I became obsessed. I taught myself Fusion360 and Blender, started a small online store, and began designing props for franchises like Star Wars, The Legend of Zelda, and Catan. What started as a class project turned into a mini business and a lifelong maker hobby.',
+    imageUrl: 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-yellow-500'
+  },
+  {
+    id: 11,
+    year: '2024',
+    title: 'Hot Takes, Cold Tanks',
+    shortDescription: 'Conversations that chilled us to the bone',
+    fullDescription: 'In our final year of university, my friend and I launched a show called Hot Takes, Cold Tanks, a mix of ice baths and unfiltered interviews. We trained to withstand the cold, filmed several episodes, and hosted backyard premieres for our neighbours. The show ended after our landlord saw the hydro bill, but it was one of the most fun and freezing projects I have ever done.',
+    imageUrl: 'https://images.pexels.com/photos/3782235/pexels-photo-3782235.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-teal-500'
+  },
+  {
+    id: 12,
+    year: '2024',
+    title: 'MARS Apprentice Revival',
+    shortDescription: 'Bringing back a legacy',
+    fullDescription: 'MARS Apprentice was a legendary business competition that once shaped careers and even sparked a few marriages. After COVID shut it down, I was asked to bring it back. In just four months, I rebuilt the entire program from scratch, secured new sponsors, and helped launch a full semester season. The best part came a year later when a new team took what we built and tripled its size, proving the power of building something that lasts.',
+    imageUrl: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-rose-500'
+  },
+  {
+    id: 13,
+    year: '2025',
+    title: 'Vipassana Retreat',
+    shortDescription: 'Ten days of silence, stillness, and self discovery',
+    fullDescription: 'In March 2025, I finally took on a lifelong goal, a ten day silent Vipassana meditation retreat. No speaking, no eye contact, no distractions, just ten hours of meditation a day. It was one of the hardest and most transformative experiences of my life, teaching me patience, clarity, and calm in ways I never expected.',
+    imageUrl: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-violet-500'
+  },
+  {
+    id: 14,
+    year: '2025',
+    title: 'DOT',
+    shortDescription: 'The notebook that bridges paper and digital',
+    fullDescription: 'I have journaled for over five years, but one problem always remained. I couldn\'t bring my digital memories into my notebook. That led me to create DOT, a smart journal that connects physical pages to digital content using NFC technology. After seventy user interviews, twenty three prototypes, and one hundred twenty three pre MVP sales, I joined The Forge incubator and began developing the companion app. Launch coming soon.',
+    imageUrl: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-slate-500'
+  },
+  {
+    id: 15,
+    year: '2025',
+    title: 'Backpacking Across Asia and Hawaii',
+    shortDescription: 'Two months of discovery and perspective',
+    fullDescription: 'Right after building DOT and completing Vipassana, I spent two months traveling through Hawaii, Japan, Vietnam, Cambodia, and Thailand. Backpacking through these places taught me about gratitude, simplicity, and how differently people around the world define happiness. It was the perfect reset and a reminder of how much there is to learn by simply exploring.',
+    imageUrl: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-amber-500'
+  },
+  {
+    id: 16,
+    year: '2025',
+    title: 'Zingos',
+    shortDescription: 'Building the next generation of makers',
+    fullDescription: 'To inspire my younger cousins\' curiosity about entrepreneurship, I started Zingos, a mini family business. I taught them to use CAD, 3D print their own toys, and launch an Etsy shop. Watching them sell their first creations was even more rewarding than selling my own. It showed me how contagious creativity can be.',
+    imageUrl: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-lime-500'
+  },
+  {
+    id: 17,
     year: '2025',
     title: 'Cansbridge Fellowship Application',
     shortDescription: 'Pursuing international opportunities and global impact',
     fullDescription: 'Applied for the prestigious Cansbridge Fellowship, seeking to expand my horizons internationally and contribute to global innovation. This represents my commitment to continuous learning, cultural exchange, and making a meaningful impact on a global scale.',
     imageUrl: 'https://www.youtube.com/watch?v=q27jHvFEjiA',
     type: 'youtube',
-    color: 'bg-pink-500'
+    color: 'bg-fuchsia-500'
   }
 ];
 
