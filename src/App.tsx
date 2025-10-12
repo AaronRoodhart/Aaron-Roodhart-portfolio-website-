@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Milestone {
@@ -213,6 +213,8 @@ function App() {
     currentIndex: 0,
     title: ''
   });
+  const [scrollScale, setScrollScale] = useState<Record<number, number>>({});
+  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -262,6 +264,46 @@ function App() {
     return `https://www.youtube-nocookie.com/embed/${videoId}`;
   };
 
+  // Scroll effect for desktop cards
+  useEffect(() => {
+    const handleScroll = () => {
+      const newScrollScale: Record<number, number> = {};
+      
+      milestones.forEach((milestone) => {
+        const cardElement = cardRefs.current[milestone.id];
+        if (cardElement) {
+          const rect = cardElement.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          const cardCenter = rect.top + rect.height / 2;
+          const viewportCenter = windowHeight / 2;
+          
+          // Calculate distance from viewport center
+          const distanceFromCenter = Math.abs(cardCenter - viewportCenter);
+          const maxDistance = windowHeight * 0.8; // Maximum distance for scaling
+          
+          // Calculate scale (1.0 at center, 0.95 at edges)
+          const scale = Math.max(0.95, 1.0 - (distanceFromCenter / maxDistance) * 0.05);
+          newScrollScale[milestone.id] = scale;
+        }
+      });
+      
+      setScrollScale(newScrollScale);
+    };
+
+    // Only add scroll listener on desktop (screen width > 768px)
+    const isDesktop = window.innerWidth > 768;
+    if (isDesktop) {
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial call
+    }
+
+    return () => {
+      if (isDesktop) {
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
   // Group milestones by year
   const groupedMilestones = milestones.reduce((acc, milestone) => {
     const year = milestone.year;
@@ -303,7 +345,14 @@ function App() {
                 <div className={`flex items-center ${index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
                   <div className="hidden sm:block sm:w-1/2"></div>
                   <div className={`w-full sm:w-1/2 pl-12 ${index % 2 === 0 ? 'sm:pl-12' : 'sm:pr-12'}`}>
-                    <div className="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-blue-500 transition-all duration-300 shadow-xl">
+                    <div 
+                      ref={(el) => (cardRefs.current[milestone.id] = el)}
+                      className="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-blue-500 transition-all duration-300 shadow-xl"
+                      style={{
+                        transform: `scale(${scrollScale[milestone.id] || 1})`,
+                        transition: 'transform 0.1s ease-out'
+                      }}
+                    >
                       <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
                         {milestone.type === 'image' ? (
                           <img
