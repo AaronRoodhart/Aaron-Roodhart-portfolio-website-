@@ -94,7 +94,7 @@ function App() {
           Aaron Roodhart's Portfolio
         </h1>
         <p className="text-center text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base">
-          A timeline of projects, achievements, and accomplishments from my journey in technology
+          Hey Cansbridge 👋 This is a quick little timeline of projects, achievements, and accomplishments from my journey over these past few years
         </p>
         
         {/* Cansbridge Video Application Section */}
