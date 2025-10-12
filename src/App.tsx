@@ -47,7 +47,7 @@ const milestones: Milestone[] = [
     title: 'Second Degree Black Belt',
     shortDescription: 'Discipline forged through years of training',
     fullDescription: 'After more than a decade of kickboxing, I earned my second degree black belt. The journey taught me far more than technique. It built my discipline, mental toughness, and respect for growth through repetition. Since then, I have continued to teach and support classes whenever I\'m back at my dojo.',
-    imageUrl: '/Black belt.jpg',
+    imageUrl: '/Header Photo.png',
     type: 'image',
     color: 'bg-purple-500',
     gallery: [
@@ -60,9 +60,13 @@ const milestones: Milestone[] = [
     title: 'Brent and Back Challenge',
     shortDescription: '162 km of paddling, 22 km of portaging, 0 hours of sleep',
     fullDescription: 'As part of a charity initiative at Gould Lake Outdoor Centre, our team completed an intense 162 kilometre paddle and 22 kilometre portage in just two days through rain, fog, and pitch darkness. We raised $10,000 to send kids to camp, proving that the hardest challenges are always the most rewarding.',
-    imageUrl: 'https://images.pexels.com/photos/3782235/pexels-photo-3782235.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/IMG_2458.JPG',
     type: 'image',
-    color: 'bg-orange-500'
+    color: 'bg-orange-500',
+    gallery: [
+      '/IMG_3175.JPG',
+      '/IMG_3177_Original.JPG'
+    ]
   },
   {
     id: 5,
