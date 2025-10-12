@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { ChevronDown, ChevronUp, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Milestone {
   id: number;
@@ -194,9 +194,52 @@ const milestones: Milestone[] = [
 
 function App() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [galleryModal, setGalleryModal] = useState<{
+    isOpen: boolean;
+    images: string[];
+    currentIndex: number;
+    title: string;
+  }>({
+    isOpen: false,
+    images: [],
+    currentIndex: 0,
+    title: ''
+  });
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
+  };
+
+  const openGallery = (images: string[], title: string, startIndex: number = 0) => {
+    setGalleryModal({
+      isOpen: true,
+      images,
+      currentIndex: startIndex,
+      title
+    });
+  };
+
+  const closeGallery = () => {
+    setGalleryModal({
+      isOpen: false,
+      images: [],
+      currentIndex: 0,
+      title: ''
+    });
+  };
+
+  const nextImage = () => {
+    setGalleryModal(prev => ({
+      ...prev,
+      currentIndex: (prev.currentIndex + 1) % prev.images.length
+    }));
+  };
+
+  const prevImage = () => {
+    setGalleryModal(prev => ({
+      ...prev,
+      currentIndex: prev.currentIndex === 0 ? prev.images.length - 1 : prev.currentIndex - 1
+    }));
   };
 
   const getYoutubeEmbedUrl = (url: string) => {
@@ -315,13 +358,23 @@ function App() {
                                 {milestone.gallery.map((imgUrl, idx) => (
                                   <div
                                     key={idx}
-                                    className="relative aspect-square rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-300 group"
+                                    className="relative aspect-square rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-300 group cursor-pointer"
+                                    onClick={() => openGallery(milestone.gallery!, milestone.title, idx)}
                                   >
                                     <img
                                       src={imgUrl}
                                       alt={`${milestone.title} gallery ${idx + 1}`}
                                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
+                                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <div className="bg-white bg-opacity-20 rounded-full p-2">
+                                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
                                 ))}
                               </div>
@@ -354,6 +407,60 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Gallery Modal */}
+      {galleryModal.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+          <div className="relative w-full h-full max-w-6xl max-h-full flex items-center justify-center">
+            {/* Close Button */}
+            <button
+              onClick={closeGallery}
+              className="absolute top-4 right-4 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full p-2 transition-all duration-200"
+            >
+              <X size={24} />
+            </button>
+
+            {/* Navigation Arrows */}
+            {galleryModal.images.length > 1 && (
+              <>
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full p-3 transition-all duration-200"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full p-3 transition-all duration-200"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              </>
+            )}
+
+            {/* Image */}
+            <div className="relative w-full h-full flex items-center justify-center">
+              <img
+                src={galleryModal.images[galleryModal.currentIndex]}
+                alt={`${galleryModal.title} - Image ${galleryModal.currentIndex + 1}`}
+                className="max-w-full max-h-full object-contain rounded-lg"
+              />
+            </div>
+
+            {/* Image Counter */}
+            {galleryModal.images.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full text-sm">
+                {galleryModal.currentIndex + 1} / {galleryModal.images.length}
+              </div>
+            )}
+
+            {/* Title */}
+            <div className="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg text-sm">
+              {galleryModal.title}
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`
         @keyframes fadeInUp {
