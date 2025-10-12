@@ -37,9 +37,15 @@ const milestones: Milestone[] = [
     title: 'Assemblies Crew',
     shortDescription: 'Redefining what a school assembly could be',
     fullDescription: 'In grade 12, my friends Andy, Ethan, and I became our school\'s "Assembly Ministers." We produced entire cinematic storylines before every assembly, a four-part series complete with a Christmas special. It was chaotic, hilarious, and surprisingly impactful, bringing together hundreds of students with something to look forward to every month.',
-    imageUrl: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/assemblies-main.png',
     type: 'image',
-    color: 'bg-green-500'
+    color: 'bg-green-500',
+    gallery: [
+      'https://youtu.be/wOVy9dmfSuM?si=m7eKJaOJZiDw9Kde',
+      'https://youtu.be/4_8DvywPuCA?si=XqtZXwluvY1Bk9wL',
+      'https://youtu.be/5JBq8jC-8-Y?si=ByF0HAeX9OHRD2Os',
+      'https://youtu.be/yIPuWSSmLfU?si=CxmtkyDgwowQP8Ll'
+    ]
   },
   {
     id: 3,
@@ -74,9 +80,9 @@ const milestones: Milestone[] = [
     title: 'Tutoring Company Launch',
     shortDescription: 'Finding purpose through the pandemic',
     fullDescription: 'When COVID hit, I saw how much students were struggling. So, instead of heading straight to university, I took a gap year to start a tutoring business that blended academics with cognitive behavioural therapy principles. It grew rapidly, helping over 2,000 students and training 23 tutors. It became the foundation of my journey as an entrepreneur and educator.',
-    imageUrl: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/Header Image.png',
     type: 'image',
-    color: 'bg-red-500'
+    color: 'bg-[#EFA013]'
   },
   {
     id: 6,
@@ -84,9 +90,12 @@ const milestones: Milestone[] = [
     title: 'Gold Duke of Edinburgh Award',
     shortDescription: 'A journey of service, challenge, and adventure',
     fullDescription: 'Over a year of volunteering, fitness, and skill development, I earned the Gold Duke of Edinburgh Award. From expeditions to residential projects, it pushed me to grow as a leader, teammate, and individual. It reminded me that consistency and courage create real impact.',
-    imageUrl: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/Main Image.jpg',
     type: 'image',
-    color: 'bg-cyan-500'
+    color: 'bg-cyan-500',
+    gallery: [
+      '/IMG_5982.JPG'
+    ]
   },
   {
     id: 7,
@@ -94,9 +103,20 @@ const milestones: Milestone[] = [
     title: 'Photography Business',
     shortDescription: 'Capturing landscapes, building perspective',
     fullDescription: 'After years of shooting as a hobby, I launched my own photography business in 2022. I taught myself Photoshop and Lightroom, refined my editing style, and started selling landscape prints inspired by my travels through Banff and beyond. What began as curiosity became a creative outlet and my first taste of entrepreneurship.',
-    imageUrl: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/photography-main.png',
     type: 'image',
-    color: 'bg-emerald-500'
+    color: 'bg-emerald-500',
+    link: 'https://aaronroodhart20.pixieset.com/aaronportfolio/',
+    gallery: [
+      '/photo1.png',
+      '/photo2.png',
+      '/photo3.png',
+      '/photo4.png',
+      '/photo5.png',
+      '/photo6.png',
+      '/photo7.png',
+      '/photo8.png'
+    ]
   },
   {
     id: 8,
@@ -104,9 +124,14 @@ const milestones: Milestone[] = [
     title: 'Extracurricular Leadership at McMaster',
     shortDescription: 'Blending business and engineering',
     fullDescription: 'In my second year, I founded a club called EC Com to bridge engineers and commerce students through international competitions. I also joined JDCC to strengthen my case competition skills and contributed to McMaster Formula Electric, helping the team combine technical design with strategic business planning. It was the year I learned how collaboration turns ideas into impact.',
-    imageUrl: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/mcmaster-main.png',
     type: 'image',
-    color: 'bg-indigo-500'
+    color: 'bg-indigo-500',
+    gallery: [
+      '/mcmaster-1.jpg',
+      '/mcmaster-2.JPG',
+      '/mcmaster-3.JPG'
+    ]
   },
   {
     id: 9,
@@ -114,9 +139,16 @@ const milestones: Milestone[] = [
     title: 'Custom Gifting Tradition',
     shortDescription: 'Turning gratitude into craftsmanship',
     fullDescription: 'Starting in 2022, I began a yearly tradition of creating handmade gifts for people who had a big impact on me. I learned to sew custom blankets for close friends and carve wooden paddles for mentors, each one representing a shared adventure or lesson learned. It became my way of saying thank you in the most personal way possible.',
-    imageUrl: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/custom-main.jpg',
     type: 'image',
-    color: 'bg-pink-500'
+    color: 'bg-pink-500',
+    gallery: [
+      '/custom-1.jpg',
+      '/custom-2.JPG',
+      '/custom-3.jpg',
+      '/custom-4.JPG',
+      '/custom-5.jpg'
+    ]
   },
   {
     id: 10,
@@ -124,9 +156,16 @@ const milestones: Milestone[] = [
     title: '3D Printing and Design',
     shortDescription: 'From prototypes to passion projects',
     fullDescription: 'After discovering 3D printing in an engineering design course, I became obsessed. I taught myself Fusion360 and Blender, started a small online store, and began designing props for franchises like Star Wars, The Legend of Zelda, and Catan. What started as a class project turned into a mini business and a lifelong maker hobby.',
-    imageUrl: 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/3d-main.JPG',
     type: 'image',
-    color: 'bg-yellow-500'
+    color: 'bg-yellow-500',
+    gallery: [
+      '/3d-1.png',
+      '/3d-2.png',
+      '/3d-3.png',
+      '/3d-4.png',
+      '/3d-video.MOV'
+    ]
   },
   {
     id: 11,
@@ -134,9 +173,14 @@ const milestones: Milestone[] = [
     title: 'Hot Takes, Cold Tanks',
     shortDescription: 'Conversations that chilled us to the bone',
     fullDescription: 'In our final year of university, my friend and I launched a show called Hot Takes, Cold Tanks, a mix of ice baths and unfiltered interviews. We trained to withstand the cold, filmed several episodes, and hosted backyard premieres for our neighbours. The show ended after our landlord saw the hydro bill, but it was one of the most fun and freezing projects I have ever done.',
-    imageUrl: 'https://images.pexels.com/photos/3782235/pexels-photo-3782235.jpeg?auto=compress&cs=tinysrgb&w=800',
-    type: 'image',
-    color: 'bg-teal-500'
+    imageUrl: '/hot-takes-christmas.mp4',
+    type: 'video',
+    color: 'bg-teal-500',
+    gallery: [
+      '/hot-takes-1.png',
+      '/hot-takes-2.png',
+      '/hot-takes-3.png'
+    ]
   },
   {
     id: 12,
@@ -144,9 +188,17 @@ const milestones: Milestone[] = [
     title: 'MARS Apprentice Revival',
     shortDescription: 'Bringing back a legacy',
     fullDescription: 'MARS Apprentice was a legendary business competition that once shaped careers and even sparked a few marriages. After COVID shut it down, I was asked to bring it back. In just four months, I rebuilt the entire program from scratch, secured new sponsors, and helped launch a full semester season. The best part came a year later when a new team took what we built and tripled its size, proving the power of building something that lasts.',
-    imageUrl: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/mars-main.png',
     type: 'image',
-    color: 'bg-rose-500'
+    color: 'bg-rose-500',
+    gallery: [
+      '/mars-1.png',
+      '/mars-2.png',
+      '/mars-3.png',
+      '/mars-4.png',
+      '/mars-5.png',
+      '/mars-6.png'
+    ]
   },
   {
     id: 13,
@@ -154,7 +206,7 @@ const milestones: Milestone[] = [
     title: 'Vipassana Retreat',
     shortDescription: 'Ten days of silence, stillness, and self discovery',
     fullDescription: 'In March 2025, I finally took on a lifelong goal, a ten day silent Vipassana meditation retreat. No speaking, no eye contact, no distractions, just ten hours of meditation a day. It was one of the hardest and most transformative experiences of my life, teaching me patience, clarity, and calm in ways I never expected.',
-    imageUrl: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/vipassana-main.JPG',
     type: 'image',
     color: 'bg-violet-500'
   },
@@ -164,9 +216,19 @@ const milestones: Milestone[] = [
     title: 'DOT',
     shortDescription: 'The notebook that bridges paper and digital',
     fullDescription: 'I have journaled for over five years, but one problem always remained. I couldn\'t bring my digital memories into my notebook. That led me to create DOT, a smart journal that connects physical pages to digital content using NFC technology. After seventy user interviews, twenty three prototypes, and one hundred twenty three pre MVP sales, I joined The Forge incubator and began developing the companion app. Launch coming soon.',
-    imageUrl: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/dot-main.png',
     type: 'image',
-    color: 'bg-slate-500'
+    color: 'bg-slate-500',
+    link: 'https://dotbooks.ca',
+    gallery: [
+      '/dot-1.jpeg',
+      '/dot-2.JPG',
+      '/dot-3.JPG',
+      '/dot-4.JPG',
+      '/dot-5.JPG',
+      '/dot-6.png',
+      '/dot-video.mov'
+    ]
   },
   {
     id: 15,
@@ -174,22 +236,24 @@ const milestones: Milestone[] = [
     title: 'Backpacking Across Asia and Hawaii',
     shortDescription: 'Two months of discovery and perspective',
     fullDescription: 'Right after building DOT and completing Vipassana, I spent two months traveling through Hawaii, Japan, Vietnam, Cambodia, and Thailand. Backpacking through these places taught me about gratitude, simplicity, and how differently people around the world define happiness. It was the perfect reset and a reminder of how much there is to learn by simply exploring.',
-    imageUrl: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
-    type: 'image',
-    color: 'bg-amber-500'
+    imageUrl: '/backpack-video.mov',
+    type: 'video',
+    color: 'bg-amber-500',
+    gallery: [
+      '/backpack-main.png',
+      '/backpack-1.jpeg',
+      '/backpack-2.jpeg',
+      '/backpack-3.jpeg',
+      '/backpack-4.JPG',
+      '/backpack-5.jpg',
+      '/backpack-6.jpg',
+      '/backpack-7.jpg',
+      '/backpack-8.JPG',
+      '/backpack-9.JPG'
+    ]
   },
   {
     id: 16,
-    year: '2025',
-    title: 'Zingos',
-    shortDescription: 'Building the next generation of makers',
-    fullDescription: 'To inspire my younger cousins\' curiosity about entrepreneurship, I started Zingos, a mini family business. I taught them to use CAD, 3D print their own toys, and launch an Etsy shop. Watching them sell their first creations was even more rewarding than selling my own. It showed me how contagious creativity can be.',
-    imageUrl: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=800',
-    type: 'image',
-    color: 'bg-lime-500'
-  },
-  {
-    id: 17,
     year: '2025',
     title: 'Cansbridge Fellowship Application',
     shortDescription: 'Pursuing international opportunities and global impact',
@@ -213,7 +277,6 @@ function App() {
     currentIndex: 0,
     title: ''
   });
-  const [scrollScale, setScrollScale] = useState<Record<number, number>>({});
   const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const toggleExpand = (id: number) => {
@@ -264,45 +327,18 @@ function App() {
     return `https://www.youtube-nocookie.com/embed/${videoId}`;
   };
 
-  // Scroll effect for desktop cards
-  useEffect(() => {
-    const handleScroll = () => {
-      const newScrollScale: Record<number, number> = {};
-      
-      milestones.forEach((milestone) => {
-        const cardElement = cardRefs.current[milestone.id];
-        if (cardElement) {
-          const rect = cardElement.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          const cardCenter = rect.top + rect.height / 2;
-          const viewportCenter = windowHeight / 2;
-          
-          // Calculate distance from viewport center
-          const distanceFromCenter = Math.abs(cardCenter - viewportCenter);
-          const maxDistance = windowHeight * 0.8; // Maximum distance for scaling
-          
-          // Calculate scale (1.0 at center, 0.95 at edges)
-          const scale = Math.max(0.95, 1.0 - (distanceFromCenter / maxDistance) * 0.05);
-          newScrollScale[milestone.id] = scale;
-        }
-      });
-      
-      setScrollScale(newScrollScale);
-    };
+  const getYoutubeThumbnail = (url: string) => {
+    let videoId = '';
 
-    // Only add scroll listener on desktop (screen width > 768px)
-    const isDesktop = window.innerWidth > 768;
-    if (isDesktop) {
-      window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial call
+    if (url.includes('youtube.com/watch?v=')) {
+      videoId = url.split('v=')[1]?.split('&')[0];
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1]?.split('?')[0];
     }
 
-    return () => {
-      if (isDesktop) {
-        window.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  };
+
 
   // Group milestones by year
   const groupedMilestones = milestones.reduce((acc, milestone) => {
@@ -318,17 +354,17 @@ function App() {
   const years = Object.keys(groupedMilestones).sort();
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen text-white overflow-x-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900">
       <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-          My Journey
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4 text-white">
+          Hi Cansbridge 👋
         </h1>
         <p className="text-center text-gray-400 mb-8 sm:mb-12 lg:mb-16 text-sm sm:text-base">
-          A timeline of milestones and achievements
+          Here are a few of my favorite projects, hobbies, and achievements I've worked on over the past few years.
         </p>
 
         <div className="relative">
-          <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-1 bg-blue-500 h-full"></div>
+          <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-1 bg-blue-500" style={{ height: 'calc(100% - 120px)' }}></div>
 
           <div className="space-y-8 sm:space-y-12 lg:space-y-16">
             {milestones.map((milestone, index) => (
@@ -348,18 +384,15 @@ function App() {
                     <div 
                       ref={(el) => (cardRefs.current[milestone.id] = el)}
                       className="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-blue-500 transition-all duration-300 shadow-xl"
-                      style={{
-                        transform: `scale(${scrollScale[milestone.id] || 1})`,
-                        transition: 'transform 0.1s ease-out'
-                      }}
                     >
                       <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
                         {milestone.type === 'image' ? (
                           <img
                             src={milestone.imageUrl}
                             alt={milestone.title}
-                            className={`w-full h-full object-cover hover:scale-110 transition-transform duration-500 ${
-                              milestone.title === 'Second Degree Black Belt' ? 'object-top' : ''
+                            className={`w-full h-full hover:scale-110 transition-transform duration-500 ${
+                              milestone.title === 'Second Degree Black Belt' ? 'object-top object-cover' : 
+                              milestone.title === 'Tutoring Company Launch' ? 'object-contain' : 'object-cover'
                             }`}
                           />
                         ) : milestone.type === 'youtube' ? (
@@ -374,6 +407,10 @@ function App() {
                             src={milestone.imageUrl}
                             className="w-full h-full object-cover"
                             controls
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
                           />
                         )}
                         <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-bold shadow-lg">
@@ -382,20 +419,24 @@ function App() {
                       </div>
 
                       <div className="p-4 sm:p-6">
-                        <div className="flex items-start justify-between gap-2 mb-2">
-                          <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                        <div className="mb-2">
+                          <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
                             {milestone.title}
                           </h3>
                           {milestone.link && (
-                            <a
-                              href={milestone.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-shrink-0 text-blue-400 hover:text-blue-300 transition-colors duration-200 mt-1"
-                              title="Visit external link"
-                            >
-                              <ExternalLink size={20} />
-                            </a>
+                            <div className="mb-2">
+                              <a
+                                href={milestone.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium text-sm"
+                                title="Visit website"
+                              >
+                                <span>🔗</span>
+                                <span>Website</span>
+                                <ExternalLink size={16} />
+                              </a>
+                            </div>
                           )}
                         </div>
                         <p className="text-gray-300 mb-4 text-sm sm:text-base">
@@ -416,13 +457,34 @@ function App() {
                               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                                 {milestone.gallery.map((mediaUrl, idx) => {
                                   const isVideo = mediaUrl.toLowerCase().match(/\.(mp4|mov|avi|webm)$/);
+                                  const isYouTube = mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be');
+                                  
                                   return (
                                     <div
                                       key={idx}
                                       className="relative aspect-square rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-300 group cursor-pointer"
                                       onClick={() => openGallery(milestone.gallery!, milestone.title, idx)}
                                     >
-                                      {isVideo ? (
+                                      {isYouTube ? (
+                                        <div className="relative w-full h-full">
+                                          <img
+                                            src={getYoutubeThumbnail(mediaUrl)}
+                                            alt={`${milestone.title} YouTube video ${idx + 1}`}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            onError={(e) => {
+                                              // Fallback to a default YouTube thumbnail if the image fails to load
+                                              e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDMyMCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSIjMDAwIi8+CjxwYXRoIGQ9Ik0xMzcuNzcgOTAuMDAwMUwxMTcuNzcgMTAwVjgwTDEzNy43NyA5MC4wMDAxWiIgZmlsbD0iI0ZGRiIvPgo8L3N2Zz4K';
+                                            }}
+                                          />
+                                          <div className="absolute inset-0 flex items-center justify-center">
+                                            <div className="bg-red-600 rounded-full p-3 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                                              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                              </svg>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      ) : isVideo ? (
                                         <video
                                           src={mediaUrl}
                                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -438,7 +500,11 @@ function App() {
                                       <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
                                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                           <div className="bg-white bg-opacity-20 rounded-full p-2">
-                                            {isVideo ? (
+                                            {isYouTube ? (
+                                              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                              </svg>
+                                            ) : isVideo ? (
                                               <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M8 5v14l11-7z"/>
                                               </svg>
@@ -460,7 +526,7 @@ function App() {
 
                         <button
                           onClick={() => toggleExpand(milestone.id)}
-                          className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium text-sm sm:text-base"
+                          className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base shadow-lg hover:shadow-xl transform hover:scale-105"
                         >
                           {expandedId === milestone.id ? (
                             <>
@@ -480,6 +546,13 @@ function App() {
                 </div>
               </div>
             ))}
+          </div>
+          
+          {/* To be continued message */}
+          <div className="text-center mt-20 mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              To be continued...
+            </h2>
           </div>
         </div>
       </div>
@@ -514,9 +587,16 @@ function App() {
               </>
             )}
 
-            {/* Image or Video */}
+            {/* Image, Video, or YouTube */}
             <div className="relative w-full h-full flex items-center justify-center">
-              {galleryModal.images[galleryModal.currentIndex].toLowerCase().match(/\.(mp4|mov|avi|webm)$/) ? (
+              {galleryModal.images[galleryModal.currentIndex].includes('youtube.com') || galleryModal.images[galleryModal.currentIndex].includes('youtu.be') ? (
+                <iframe
+                  src={getYoutubeEmbedUrl(galleryModal.images[galleryModal.currentIndex])}
+                  className="w-full h-full max-w-4xl max-h-[80vh] rounded-lg"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : galleryModal.images[galleryModal.currentIndex].toLowerCase().match(/\.(mp4|mov|avi|webm)$/) ? (
                 <video
                   src={galleryModal.images[galleryModal.currentIndex]}
                   controls
