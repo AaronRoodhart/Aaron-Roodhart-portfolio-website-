@@ -47,9 +47,12 @@ const milestones: Milestone[] = [
     title: 'Second Degree Black Belt',
     shortDescription: 'Discipline forged through years of training',
     fullDescription: 'After more than a decade of kickboxing, I earned my second degree black belt. The journey taught me far more than technique. It built my discipline, mental toughness, and respect for growth through repetition. Since then, I have continued to teach and support classes whenever I\'m back at my dojo.',
-    imageUrl: 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageUrl: '/Black belt.jpg',
     type: 'image',
-    color: 'bg-purple-500'
+    color: 'bg-purple-500',
+    gallery: [
+      '/cm-chat-media-video-1_4e594edc-6233-5e4e-9efc-fef0483eba62_67_0_0.mov'
+    ]
   },
   {
     id: 4,
