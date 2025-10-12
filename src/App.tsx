@@ -305,7 +305,9 @@ function App() {
                           <img
                             src={milestone.imageUrl}
                             alt={milestone.title}
-                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                            className={`w-full h-full object-cover hover:scale-110 transition-transform duration-500 ${
+                              milestone.title === 'Second Degree Black Belt' ? 'object-top' : ''
+                            }`}
                           />
                         ) : milestone.type === 'youtube' ? (
                           <iframe
