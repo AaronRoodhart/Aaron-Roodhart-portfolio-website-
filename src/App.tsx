@@ -25,9 +25,10 @@ const milestones: Milestone[] = [
     type: 'youtube',
     color: 'bg-blue-500',
     gallery: [
-      '/IMG_0183.MP4',
       '/IMG_1572.JPG',
-      '/IMG_1873.JPG'
+      '/IMG_1873.JPG',
+      '/IMG_0350.JPG',
+      '/4298327E-377B-4D54-8A1A-56697C2C9640.jpeg'
     ]
   },
   {
