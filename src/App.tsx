@@ -277,7 +277,10 @@ const useLazyLoad = (threshold = 0.1) => {
           observer.disconnect();
         }
       },
-      { threshold }
+      { 
+        threshold,
+        rootMargin: '50px' // Start loading 50px before element is visible
+      }
     );
 
     if (ref.current) {
@@ -307,12 +310,12 @@ const LazyImage = ({
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className="w-full h-full relative">
       {isVisible && (
         <img
           src={src}
           alt={alt}
-          className={`w-full h-full transition-opacity duration-300 ${
+          className={`w-full h-full transition-opacity duration-300 ${className} ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           onLoad={() => setImageLoaded(true)}
@@ -322,12 +325,12 @@ const LazyImage = ({
       )}
       {!isVisible && (
         <div 
-          className="w-full h-full bg-gray-200 flex items-center justify-center"
+          className={`w-full h-full bg-gray-200 flex items-center justify-center ${className}`}
           style={{ backgroundImage: `url(${placeholder})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         />
       )}
       {imageError && (
-        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+        <div className={`w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 ${className}`}>
           Failed to load image
         </div>
       )}
@@ -357,11 +360,11 @@ const LazyVideo = ({
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className="w-full h-full relative">
       {isVisible && (
         <video
           src={src}
-          className={`w-full h-full transition-opacity duration-300 ${
+          className={`w-full h-full transition-opacity duration-300 ${className} ${
             videoLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           controls={controls}
@@ -374,7 +377,7 @@ const LazyVideo = ({
         />
       )}
       {!isVisible && (
-        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+        <div className={`w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 ${className}`}>
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500 mx-auto mb-2"></div>
             <p>Loading video...</p>
@@ -468,24 +471,26 @@ function App() {
     currentIndex: 0,
     title: ''
   });
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
   const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
-  // Preload critical images (first 3 milestones)
+  // Preload only the first critical image for faster initial load
   useEffect(() => {
-    const criticalImages = milestones.slice(0, 3).map(milestone => {
-      if (milestone.type === 'image') {
-        return milestone.imageUrl;
-      }
-      return null;
-    }).filter(Boolean) as string[];
-
-    criticalImages.forEach(src => {
+    const firstImage = milestones.find(milestone => milestone.type === 'image');
+    if (firstImage) {
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
-      link.href = src;
+      link.href = firstImage.imageUrl;
       document.head.appendChild(link);
-    });
+    }
+    
+    // Set page as loaded after a short delay to show loading state
+    const timer = setTimeout(() => {
+      setIsPageLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const toggleExpand = (id: number) => {
@@ -561,6 +566,20 @@ function App() {
 
   // Get years in chronological order (currently unused but kept for future functionality)
   // const years = Object.keys(groupedMilestones).sort();
+
+  // Show loading screen initially
+  if (!isPageLoaded) {
+    return (
+      <div className="min-h-screen text-white overflow-x-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            Loading Portfolio...
+          </h2>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900">
