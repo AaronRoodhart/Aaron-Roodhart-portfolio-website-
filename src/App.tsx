@@ -101,7 +101,7 @@ function App() {
         {/* Cansbridge Video Application Section */}
         <div className="mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-4 sm:mb-6 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Cansbridge Video Application
+            Video Application
           </h2>
           <div className="relative w-full max-w-4xl mx-auto">
             <div className="aspect-video rounded-lg overflow-hidden shadow-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300">
@@ -163,7 +163,7 @@ function App() {
                             controls
                           />
                         )}
-                        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-blue-500 text-white px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-semibold">
+                        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-bold shadow-lg">
                           {milestone.year}
                         </div>
                       </div>
@@ -172,6 +172,9 @@ function App() {
                         <h3 className="text-xl sm:text-2xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                           {milestone.title}
                         </h3>
+                        <div className="text-blue-400 font-semibold text-lg sm:text-xl mb-3">
+                          {milestone.year}
+                        </div>
                         <p className="text-gray-300 mb-4 text-sm sm:text-base">
                           {milestone.shortDescription}
                         </p>
