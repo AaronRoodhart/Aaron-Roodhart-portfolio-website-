@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Milestone {
@@ -264,6 +264,197 @@ const milestones: Milestone[] = [
   }
 ];
 
+// Custom hook for lazy loading
+const useLazyLoad = (threshold = 0.1) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return [ref, isVisible] as const;
+};
+
+// Lazy Image Component
+const LazyImage = ({ 
+  src, 
+  alt, 
+  className, 
+  placeholder = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDMyMCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSIjZjNmNGY2Ii8+Cjx0ZXh0IHg9IjE2MCIgeT0iOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5YTNhZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TG9hZGluZy4uLjwvdGV4dD4KPC9zdmc+"
+}: { 
+  src: string; 
+  alt: string; 
+  className?: string;
+  placeholder?: string;
+}) => {
+  const [ref, isVisible] = useLazyLoad();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <div ref={ref} className={className}>
+      {isVisible && (
+        <img
+          src={src}
+          alt={alt}
+          className={`w-full h-full transition-opacity duration-300 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageError(true)}
+          loading="lazy"
+        />
+      )}
+      {!isVisible && (
+        <div 
+          className="w-full h-full bg-gray-200 flex items-center justify-center"
+          style={{ backgroundImage: `url(${placeholder})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        />
+      )}
+      {imageError && (
+        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+          Failed to load image
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Lazy Video Component
+const LazyVideo = ({ 
+  src, 
+  className, 
+  controls = true,
+  autoPlay = false,
+  muted = true,
+  loop = true,
+  playsInline = true
+}: { 
+  src: string; 
+  className?: string;
+  controls?: boolean;
+  autoPlay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  playsInline?: boolean;
+}) => {
+  const [ref, isVisible] = useLazyLoad();
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  return (
+    <div ref={ref} className={className}>
+      {isVisible && (
+        <video
+          src={src}
+          className={`w-full h-full transition-opacity duration-300 ${
+            videoLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          controls={controls}
+          autoPlay={autoPlay}
+          muted={muted}
+          loop={loop}
+          playsInline={playsInline}
+          onLoadedData={() => setVideoLoaded(true)}
+          preload="metadata"
+        />
+      )}
+      {!isVisible && (
+        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500 mx-auto mb-2"></div>
+            <p>Loading video...</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Lazy YouTube Embed Component
+const LazyYouTubeEmbed = ({ 
+  url, 
+  title 
+}: { 
+  url: string; 
+  title: string;
+}) => {
+  const [ref, isVisible] = useLazyLoad();
+  const [embedLoaded, setEmbedLoaded] = useState(false);
+
+  const getYoutubeEmbedUrl = (url: string) => {
+    let videoId = '';
+
+    if (url.includes('youtube.com/watch?v=')) {
+      videoId = url.split('v=')[1]?.split('&')[0];
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1]?.split('?')[0];
+    }
+
+    return `https://www.youtube-nocookie.com/embed/${videoId}`;
+  };
+
+  const getYoutubeThumbnail = (url: string) => {
+    let videoId = '';
+
+    if (url.includes('youtube.com/watch?v=')) {
+      videoId = url.split('v=')[1]?.split('&')[0];
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1]?.split('?')[0];
+    }
+
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  };
+
+  return (
+    <div ref={ref} className="w-full h-full relative">
+      {isVisible ? (
+        <iframe
+          src={getYoutubeEmbedUrl(url)}
+          className={`w-full h-full transition-opacity duration-300 ${
+            embedLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          onLoad={() => setEmbedLoaded(true)}
+        />
+      ) : (
+        <div className="w-full h-full bg-gray-200 flex items-center justify-center relative">
+          <img
+            src={getYoutubeThumbnail(url)}
+            alt={`${title} YouTube thumbnail`}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDMyMCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSIjZjNmNGY2Ii8+Cjx0ZXh0IHg9IjE2MCIgeT0iOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5YTNhZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TG9hZGluZy4uLjwvdGV4dD4KPC9zdmc+';
+            }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-red-600 rounded-full p-4 opacity-90 hover:opacity-100 transition-opacity duration-300">
+              <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 function App() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [galleryModal, setGalleryModal] = useState<{
@@ -278,6 +469,24 @@ function App() {
     title: ''
   });
   const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
+
+  // Preload critical images (first 3 milestones)
+  useEffect(() => {
+    const criticalImages = milestones.slice(0, 3).map(milestone => {
+      if (milestone.type === 'image') {
+        return milestone.imageUrl;
+      }
+      return null;
+    }).filter(Boolean) as string[];
+
+    criticalImages.forEach(src => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      document.head.appendChild(link);
+    });
+  }, []);
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -387,7 +596,7 @@ function App() {
                     >
                       <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
                         {milestone.type === 'image' ? (
-                          <img
+                          <LazyImage
                             src={milestone.imageUrl}
                             alt={milestone.title}
                             className={`w-full h-full hover:scale-110 transition-transform duration-500 ${
@@ -396,14 +605,12 @@ function App() {
                             }`}
                           />
                         ) : milestone.type === 'youtube' ? (
-                          <iframe
-                            src={getYoutubeEmbedUrl(milestone.imageUrl)}
-                            className="w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
+                          <LazyYouTubeEmbed
+                            url={milestone.imageUrl}
+                            title={milestone.title}
                           />
                         ) : (
-                          <video
+                          <LazyVideo
                             src={milestone.imageUrl}
                             className="w-full h-full object-cover"
                             controls
@@ -485,13 +692,15 @@ function App() {
                                           </div>
                                         </div>
                                       ) : isVideo ? (
-                                        <video
+                                        <LazyVideo
                                           src={mediaUrl}
                                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                          controls={false}
+                                          autoPlay={false}
                                           muted
                                         />
                                       ) : (
-                                        <img
+                                        <LazyImage
                                           src={mediaUrl}
                                           alt={`${milestone.title} gallery ${idx + 1}`}
                                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
