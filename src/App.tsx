@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Milestone {
@@ -340,18 +340,18 @@ function App() {
   };
 
 
-  // Group milestones by year
-  const groupedMilestones = milestones.reduce((acc, milestone) => {
-    const year = milestone.year;
-    if (!acc[year]) {
-      acc[year] = [];
-    }
-    acc[year].push(milestone);
-    return acc;
-  }, {} as Record<string, Milestone[]>);
+  // Group milestones by year (currently unused but kept for future functionality)
+  // const groupedMilestones = milestones.reduce((acc, milestone) => {
+  //   const year = milestone.year;
+  //   if (!acc[year]) {
+  //     acc[year] = [];
+  //   }
+  //   acc[year].push(milestone);
+  //   return acc;
+  // }, {} as Record<string, Milestone[]>);
 
-  // Get years in chronological order
-  const years = Object.keys(groupedMilestones).sort();
+  // Get years in chronological order (currently unused but kept for future functionality)
+  // const years = Object.keys(groupedMilestones).sort();
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900">
