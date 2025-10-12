@@ -206,6 +206,19 @@ function App() {
     return `https://www.youtube-nocookie.com/embed/${videoId}`;
   };
 
+  // Group milestones by year
+  const groupedMilestones = milestones.reduce((acc, milestone) => {
+    const year = milestone.year;
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(milestone);
+    return acc;
+  }, {} as Record<string, Milestone[]>);
+
+  // Get years in chronological order
+  const years = Object.keys(groupedMilestones).sort();
+
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
@@ -217,127 +230,122 @@ function App() {
         </p>
 
         <div className="relative">
-          <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-1 top-10 sm:top-12 bottom-0 flex flex-col">
-            <div className="flex-1 bg-gradient-to-b from-orange-500 to-red-500"></div>
-            <div className="flex-1 bg-gradient-to-b from-red-500 to-purple-600"></div>
-            <div className="flex-1 bg-gradient-to-b from-purple-600 to-emerald-500"></div>
-            <div className="flex-1 bg-gradient-to-b from-emerald-500 to-cyan-500"></div>
-            <div className="flex-1 bg-gradient-to-b from-cyan-500 to-pink-500"></div>
-            <div className="flex-1 bg-pink-500"></div>
-          </div>
+          <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-1 bg-blue-500 h-full"></div>
 
-          <div className="space-y-12 sm:space-y-16 lg:space-y-20">
-            {milestones.map((milestone, index) => (
-              <div
-                key={milestone.id}
-                className="relative pt-10 sm:pt-12"
-                style={{
-                  opacity: 0,
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.2}s forwards`
-                }}
-              >
-                <div className={`absolute left-[18px] sm:left-1/2 top-10 sm:top-12 transform -translate-x-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 ${milestone.color} rounded-full border-2 sm:border-4 border-black z-10 hover:scale-125 transition-transform duration-300 shadow-lg`}></div>
-
-                <div className={`absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 top-0 ${milestone.color} text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded text-base sm:text-lg font-bold z-20 whitespace-nowrap shadow-lg`}>
-                  {milestone.year}
+          <div className="space-y-16 sm:space-y-20 lg:space-y-24">
+            {years.map((year, yearIndex) => (
+              <div key={year} className="relative">
+                {/* Year Header */}
+                <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-6 h-6 sm:w-8 sm:h-8 bg-blue-500 rounded-full border-2 sm:border-4 border-black z-10 hover:scale-125 transition-transform duration-300 shadow-lg shadow-blue-500/50"></div>
+                <div className="absolute left-12 sm:left-1/2 sm:transform sm:translate-x-4 top-1/2 sm:top-1/2 sm:-translate-y-1/2 bg-gray-900 border border-blue-500 rounded-lg px-3 py-2 text-blue-400 font-bold text-lg sm:text-xl shadow-lg">
+                  {year}
                 </div>
 
-                <div className={`flex items-center ${index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
-                  <div className="hidden sm:block sm:w-1/2"></div>
-                  <div className={`w-full sm:w-1/2 pl-10 sm:pl-12 ${index % 2 === 0 ? '' : 'sm:pr-12 sm:pl-0'}`}>
-                    <div className={`bg-gray-900 rounded-lg overflow-hidden border-l-4 ${milestone.color.replace('bg-', 'border-l-')} border-r border-t border-b border-gray-800 transition-all duration-300 shadow-xl hover:shadow-2xl`}>
-                      <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
-                        {milestone.type === 'image' ? (
-                          <img
-                            src={milestone.imageUrl}
-                            alt={milestone.title}
-                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                          />
-                        ) : milestone.type === 'youtube' ? (
-                          <iframe
-                            src={getYoutubeEmbedUrl(milestone.imageUrl)}
-                            className="w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        ) : (
-                          <video
-                            src={milestone.imageUrl}
-                            className="w-full h-full object-cover"
-                            controls
-                          />
-                        )}
-                      </div>
-
-                      <div className="p-4 sm:p-6">
-                        <div className="flex items-start justify-between gap-2 mb-2">
-                          <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                            {milestone.title}
-                          </h3>
-                          {milestone.link && (
-                            <a
-                              href={milestone.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-shrink-0 text-blue-400 hover:text-blue-300 transition-colors duration-200 mt-1"
-                              title="Visit external link"
-                            >
-                              <ExternalLink size={20} />
-                            </a>
+                {/* Experiences for this year */}
+                <div className="ml-16 sm:ml-0 sm:pl-12 space-y-8 sm:space-y-12">
+                  {groupedMilestones[year].map((milestone, milestoneIndex) => (
+                    <div
+                      key={milestone.id}
+                      className="relative"
+                      style={{
+                        opacity: 0,
+                        animation: `fadeInUp 0.6s ease-out ${(yearIndex * 0.3) + (milestoneIndex * 0.1)}s forwards`
+                      }}
+                    >
+                      <div className={`bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-blue-500 transition-all duration-300 shadow-xl`}>
+                        <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
+                          {milestone.type === 'image' ? (
+                            <img
+                              src={milestone.imageUrl}
+                              alt={milestone.title}
+                              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                            />
+                          ) : milestone.type === 'youtube' ? (
+                            <iframe
+                              src={getYoutubeEmbedUrl(milestone.imageUrl)}
+                              className="w-full h-full"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            />
+                          ) : (
+                            <video
+                              src={milestone.imageUrl}
+                              className="w-full h-full object-cover"
+                              controls
+                            />
                           )}
                         </div>
-                        <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                          {milestone.shortDescription}
-                        </p>
 
-                        <div
-                          className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                            expandedId === milestone.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-                          }`}
-                        >
-                          <p className="text-gray-400 mb-4 leading-relaxed text-sm sm:text-base">
-                            {milestone.fullDescription}
+                        <div className="p-4 sm:p-6">
+                          <div className="flex items-start justify-between gap-2 mb-2">
+                            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                              {milestone.title}
+                            </h3>
+                            {milestone.link && (
+                              <a
+                                href={milestone.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-shrink-0 text-blue-400 hover:text-blue-300 transition-colors duration-200 mt-1"
+                                title="Visit external link"
+                              >
+                                <ExternalLink size={20} />
+                              </a>
+                            )}
+                          </div>
+                          <p className="text-gray-300 mb-4 text-sm sm:text-base">
+                            {milestone.shortDescription}
                           </p>
 
-                          {milestone.gallery && milestone.gallery.length > 0 && (
-                            <div className="mt-4">
-                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-                                {milestone.gallery.map((imgUrl, idx) => (
-                                  <div
-                                    key={idx}
-                                    className="relative aspect-square rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-300 group"
-                                  >
-                                    <img
-                                      src={imgUrl}
-                                      alt={`${milestone.title} gallery ${idx + 1}`}
-                                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
+                          <div
+                            className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                              expandedId === milestone.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                            }`}
+                          >
+                            <p className="text-gray-400 mb-4 leading-relaxed text-sm sm:text-base">
+                              {milestone.fullDescription}
+                            </p>
 
-                        <button
-                          onClick={() => toggleExpand(milestone.id)}
-                          className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium text-sm sm:text-base"
-                        >
-                          {expandedId === milestone.id ? (
-                            <>
-                              <span>Show Less</span>
-                              <ChevronUp size={18} className="sm:w-5 sm:h-5" />
-                            </>
-                          ) : (
-                            <>
-                              <span>Read More</span>
-                              <ChevronDown size={18} className="sm:w-5 sm:h-5" />
-                            </>
-                          )}
-                        </button>
+                            {milestone.gallery && milestone.gallery.length > 0 && (
+                              <div className="mt-4">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                                  {milestone.gallery.map((imgUrl, idx) => (
+                                    <div
+                                      key={idx}
+                                      className="relative aspect-square rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-300 group"
+                                    >
+                                      <img
+                                        src={imgUrl}
+                                        alt={`${milestone.title} gallery ${idx + 1}`}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+
+                          <button
+                            onClick={() => toggleExpand(milestone.id)}
+                            className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium text-sm sm:text-base"
+                          >
+                            {expandedId === milestone.id ? (
+                              <>
+                                <span>Show Less</span>
+                                <ChevronUp size={18} className="sm:w-5 sm:h-5" />
+                              </>
+                            ) : (
+                              <>
+                                <span>Read More</span>
+                                <ChevronDown size={18} className="sm:w-5 sm:h-5" />
+                              </>
+                            )}
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             ))}
