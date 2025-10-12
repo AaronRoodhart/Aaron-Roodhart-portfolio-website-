@@ -21,9 +21,14 @@ const milestones: Milestone[] = [
     title: 'Driveway Grad',
     shortDescription: 'A socially distanced farewell',
     fullDescription: 'Graduating in 2020 was anything but ordinary. After four unforgettable years, I couldn\'t stand the idea of just receiving our diplomas in the mail, so a few friends and I pitched a new idea to our school board, a driveway graduation. Every student got their own personal ceremony right at home. It was heartfelt, unforgettable, and the perfect way to say goodbye to our high school years.',
-    imageUrl: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
-    type: 'image',
-    color: 'bg-blue-500'
+    imageUrl: 'https://youtu.be/UTGcwufq_Jc?si=qoq_KWVwMuMXsjlz',
+    type: 'youtube',
+    color: 'bg-blue-500',
+    gallery: [
+      '/photos/IMG_0183.MP4',
+      '/photos/IMG_1572.JPG',
+      '/photos/IMG_1873.JPG'
+    ]
   },
   {
     id: 2,
