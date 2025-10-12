@@ -242,110 +242,118 @@ function App() {
                 </div>
 
                 {/* Experiences for this year */}
-                <div className="ml-16 sm:ml-0 sm:pl-12 space-y-8 sm:space-y-12">
-                  {groupedMilestones[year].map((milestone, milestoneIndex) => (
-                    <div
-                      key={milestone.id}
-                      className="relative"
-                      style={{
-                        opacity: 0,
-                        animation: `fadeInUp 0.6s ease-out ${(yearIndex * 0.3) + (milestoneIndex * 0.1)}s forwards`
-                      }}
-                    >
-                      <div className={`bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-blue-500 transition-all duration-300 shadow-xl`}>
-                        <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
-                          {milestone.type === 'image' ? (
-                            <img
-                              src={milestone.imageUrl}
-                              alt={milestone.title}
-                              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                            />
-                          ) : milestone.type === 'youtube' ? (
-                            <iframe
-                              src={getYoutubeEmbedUrl(milestone.imageUrl)}
-                              className="w-full h-full"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
-                            />
-                          ) : (
-                            <video
-                              src={milestone.imageUrl}
-                              className="w-full h-full object-cover"
-                              controls
-                            />
-                          )}
-                        </div>
-
-                        <div className="p-4 sm:p-6">
-                          <div className="flex items-start justify-between gap-2 mb-2">
-                            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                              {milestone.title}
-                            </h3>
-                            {milestone.link && (
-                              <a
-                                href={milestone.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex-shrink-0 text-blue-400 hover:text-blue-300 transition-colors duration-200 mt-1"
-                                title="Visit external link"
-                              >
-                                <ExternalLink size={20} />
-                              </a>
-                            )}
-                          </div>
-                          <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                            {milestone.shortDescription}
-                          </p>
-
-                          <div
-                            className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                              expandedId === milestone.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-                            }`}
-                          >
-                            <p className="text-gray-400 mb-4 leading-relaxed text-sm sm:text-base">
-                              {milestone.fullDescription}
-                            </p>
-
-                            {milestone.gallery && milestone.gallery.length > 0 && (
-                              <div className="mt-4">
-                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-                                  {milestone.gallery.map((imgUrl, idx) => (
-                                    <div
-                                      key={idx}
-                                      className="relative aspect-square rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-300 group"
-                                    >
-                                      <img
-                                        src={imgUrl}
-                                        alt={`${milestone.title} gallery ${idx + 1}`}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                      />
-                                    </div>
-                                  ))}
-                                </div>
+                <div className="ml-16 sm:ml-0 space-y-8 sm:space-y-12">
+                  {groupedMilestones[year].map((milestone, milestoneIndex) => {
+                    const globalIndex = milestones.findIndex(m => m.id === milestone.id);
+                    return (
+                      <div
+                        key={milestone.id}
+                        className="relative"
+                        style={{
+                          opacity: 0,
+                          animation: `fadeInUp 0.6s ease-out ${(yearIndex * 0.3) + (milestoneIndex * 0.1)}s forwards`
+                        }}
+                      >
+                        <div className={`flex items-center ${globalIndex % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
+                          <div className="hidden sm:block sm:w-1/2"></div>
+                          <div className={`w-full sm:w-1/2 pl-10 sm:pl-12 ${globalIndex % 2 === 0 ? '' : 'sm:pr-12 sm:pl-0'}`}>
+                            <div className={`bg-gray-900 rounded-lg overflow-hidden border-l-4 ${milestone.color.replace('bg-', 'border-l-')} border-r border-t border-b border-gray-800 transition-all duration-300 shadow-xl hover:shadow-2xl`}>
+                              <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
+                                {milestone.type === 'image' ? (
+                                  <img
+                                    src={milestone.imageUrl}
+                                    alt={milestone.title}
+                                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                                  />
+                                ) : milestone.type === 'youtube' ? (
+                                  <iframe
+                                    src={getYoutubeEmbedUrl(milestone.imageUrl)}
+                                    className="w-full h-full"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                  />
+                                ) : (
+                                  <video
+                                    src={milestone.imageUrl}
+                                    className="w-full h-full object-cover"
+                                    controls
+                                  />
+                                )}
                               </div>
-                            )}
-                          </div>
 
-                          <button
-                            onClick={() => toggleExpand(milestone.id)}
-                            className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium text-sm sm:text-base"
-                          >
-                            {expandedId === milestone.id ? (
-                              <>
-                                <span>Show Less</span>
-                                <ChevronUp size={18} className="sm:w-5 sm:h-5" />
-                              </>
-                            ) : (
-                              <>
-                                <span>Read More</span>
-                                <ChevronDown size={18} className="sm:w-5 sm:h-5" />
-                              </>
-                            )}
-                          </button>
+                              <div className="p-4 sm:p-6">
+                                <div className="flex items-start justify-between gap-2 mb-2">
+                                  <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                                    {milestone.title}
+                                  </h3>
+                                  {milestone.link && (
+                                    <a
+                                      href={milestone.link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="flex-shrink-0 text-blue-400 hover:text-blue-300 transition-colors duration-200 mt-1"
+                                      title="Visit external link"
+                                    >
+                                      <ExternalLink size={20} />
+                                    </a>
+                                  )}
+                                </div>
+                                <p className="text-gray-300 mb-4 text-sm sm:text-base">
+                                  {milestone.shortDescription}
+                                </p>
+
+                                <div
+                                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                                    expandedId === milestone.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                                  }`}
+                                >
+                                  <p className="text-gray-400 mb-4 leading-relaxed text-sm sm:text-base">
+                                    {milestone.fullDescription}
+                                  </p>
+
+                                  {milestone.gallery && milestone.gallery.length > 0 && (
+                                    <div className="mt-4">
+                                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                                        {milestone.gallery.map((imgUrl, idx) => (
+                                          <div
+                                            key={idx}
+                                            className="relative aspect-square rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-300 group"
+                                          >
+                                            <img
+                                              src={imgUrl}
+                                              alt={`${milestone.title} gallery ${idx + 1}`}
+                                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            />
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+
+                                <button
+                                  onClick={() => toggleExpand(milestone.id)}
+                                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium text-sm sm:text-base"
+                                >
+                                  {expandedId === milestone.id ? (
+                                    <>
+                                      <span>Show Less</span>
+                                      <ChevronUp size={18} className="sm:w-5 sm:h-5" />
+                                    </>
+                                  ) : (
+                                    <>
+                                      <span>Read More</span>
+                                      <ChevronDown size={18} className="sm:w-5 sm:h-5" />
+                                    </>
+                                  )}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ))}
