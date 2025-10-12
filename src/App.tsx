@@ -94,7 +94,8 @@ function App() {
           Aaron Roodhart's Portfolio
         </h1>
         <p className="text-center text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base">
-          Hey Cansbridge 👋 This is a quick little timeline of projects, achievements, and accomplishments from my journey over these past few years
+          Hey Cansbridge 👋<br />
+          This is a quick little timeline of projects, achievements, and accomplishments from my journey over these past few years
         </p>
         
         {/* Cansbridge Video Application Section */}
@@ -113,6 +114,13 @@ function App() {
               />
             </div>
           </div>
+        </div>
+
+        {/* Timeline Section */}
+        <div className="mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-4 sm:mb-6 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            Timeline
+          </h2>
         </div>
 
         <div className="relative">
