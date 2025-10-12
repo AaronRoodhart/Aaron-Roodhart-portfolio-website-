@@ -14,7 +14,8 @@
     "deploy": "gh-pages -d dist",
     "optimize-images": "node scripts/optimize-images.js",
     "replace-images": "node scripts/replace-images.js",
-    "fix-aspect-ratios": "node scripts/fix-aspect-ratios.js"
+    "fix-aspect-ratios": "node scripts/fix-aspect-ratios.js",
+    "rotate-helmet": "node scripts/rotate-clone-helmet.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
