@@ -137,6 +137,9 @@ function App() {
                 }}
               >
                 <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-4 h-4 sm:w-6 sm:h-6 bg-blue-500 rounded-full border-2 sm:border-4 border-black z-10 hover:scale-125 transition-transform duration-300 shadow-lg shadow-blue-500/50"></div>
+                <div className="absolute left-8 sm:left-1/2 sm:transform sm:translate-x-4 top-1/2 sm:top-1/2 sm:-translate-y-1/2 bg-gray-900 border border-blue-500 rounded-lg px-2 py-1 text-blue-400 font-bold text-sm sm:text-base shadow-lg">
+                  {milestone.year}
+                </div>
 
                 <div className={`flex items-center ${index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
                   <div className="hidden sm:block sm:w-1/2"></div>
@@ -163,18 +166,12 @@ function App() {
                             controls
                           />
                         )}
-                        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-bold shadow-lg">
-                          {milestone.year}
-                        </div>
                       </div>
 
                       <div className="p-4 sm:p-6">
                         <h3 className="text-xl sm:text-2xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                           {milestone.title}
                         </h3>
-                        <div className="text-blue-400 font-semibold text-lg sm:text-xl mb-3">
-                          {milestone.year}
-                        </div>
                         <p className="text-gray-300 mb-4 text-sm sm:text-base">
                           {milestone.shortDescription}
                         </p>
