@@ -17,67 +17,91 @@ interface Milestone {
 const milestones: Milestone[] = [
   {
     id: 1,
-    year: '2020',
-    title: 'First Major Project Launch',
-    shortDescription: 'Launched innovative web platform',
-    fullDescription: 'Successfully launched a comprehensive web platform that revolutionized how users interact with digital content. This project involved cutting-edge technologies and reached over 10,000 users in the first month.',
+    year: '2017',
+    title: 'High School Graduation & University Journey Begins',
+    shortDescription: 'Graduated high school and began my academic journey in technology',
+    fullDescription: 'Completed high school with honors and embarked on my university education, laying the foundation for my career in technology and innovation. This marked the beginning of my formal education in computer science and engineering.',
     imageUrl: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
-    color: 'bg-orange-500',
-    link: 'https://example.com',
-    gallery: [
-      'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800'
-    ]
+    color: 'bg-blue-500'
   },
   {
     id: 2,
-    year: '2021',
-    title: 'Award Recognition',
-    shortDescription: 'Received industry excellence award',
-    fullDescription: 'Honored with the Innovation Excellence Award for outstanding contributions to the tech industry. This recognition validated years of hard work and dedication to pushing boundaries in software development.',
+    year: '2018',
+    title: 'First Programming Projects',
+    shortDescription: 'Developed initial software applications and web projects',
+    fullDescription: 'Began creating my first programming projects, learning various programming languages and frameworks. Built several web applications and software tools that demonstrated my growing technical skills and passion for problem-solving through code.',
+    imageUrl: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-green-500'
+  },
+  {
+    id: 3,
+    year: '2019',
+    title: 'Academic Excellence & Research',
+    shortDescription: 'Achieved academic milestones and began research projects',
+    fullDescription: 'Maintained excellent academic performance while beginning to engage in research projects. Started exploring advanced topics in computer science and began contributing to open-source projects, building a strong foundation for future innovations.',
+    imageUrl: 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-purple-500'
+  },
+  {
+    id: 4,
+    year: '2020',
+    title: 'Pandemic Adaptation & Remote Learning',
+    shortDescription: 'Adapted to remote learning and continued academic growth',
+    fullDescription: 'Successfully navigated the challenges of remote learning during the pandemic, maintaining academic excellence while developing new skills in remote collaboration and digital communication. This period strengthened my adaptability and resilience.',
     imageUrl: 'https://images.pexels.com/photos/3782235/pexels-photo-3782235.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-orange-500'
+  },
+  {
+    id: 5,
+    year: '2021',
+    title: 'Advanced Technical Skills Development',
+    shortDescription: 'Mastered advanced programming languages and frameworks',
+    fullDescription: 'Dedicated significant time to mastering advanced programming languages, frameworks, and development tools. Built complex applications and contributed to meaningful projects that showcased my technical growth and problem-solving abilities.',
+    imageUrl: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-red-500'
   },
   {
-    id: 3,
+    id: 6,
     year: '2022',
-    title: 'Team Expansion',
-    shortDescription: 'Grew team to 50+ members',
-    fullDescription: 'Successfully scaled the team from 10 to over 50 talented individuals across multiple departments. This growth enabled us to take on more ambitious projects and deliver exceptional results consistently.',
-    imageUrl: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-    type: 'image',
-    color: 'bg-purple-600'
-  },
-  {
-    id: 4,
-    year: '2023',
-    title: 'Product Evolution',
-    shortDescription: 'Released version 2.0 with AI features',
-    fullDescription: 'Launched a completely reimagined version of our flagship product, incorporating advanced AI capabilities that transformed user experience. The release was met with overwhelming positive feedback and drove significant market growth.',
+    title: 'Internship & Industry Experience',
+    shortDescription: 'Gained valuable industry experience through internships',
+    fullDescription: 'Secured and completed internships that provided hands-on experience in the technology industry. Worked on real-world projects, collaborated with professional teams, and gained insights into industry best practices and workflows.',
     imageUrl: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
-    type: 'image',
-    color: 'bg-emerald-500'
-  },
-  {
-    id: 5,
-    year: '2024',
-    title: 'Global Expansion',
-    shortDescription: 'Opened offices in 5 new countries',
-    fullDescription: 'Expanded operations globally with new offices across Europe, Asia, and South America. This strategic move positioned us as a truly international company and opened doors to exciting new market opportunities.',
-    imageUrl: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
     type: 'image',
     color: 'bg-cyan-500'
   },
   {
-    id: 6,
+    id: 7,
+    year: '2023',
+    title: 'Leadership & Project Management',
+    shortDescription: 'Took on leadership roles in academic and personal projects',
+    fullDescription: 'Stepped into leadership roles, managing teams and overseeing complex projects from conception to completion. Developed strong project management skills and learned to balance technical excellence with effective team coordination and communication.',
+    imageUrl: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-emerald-500'
+  },
+  {
+    id: 8,
+    year: '2024',
+    title: 'Innovation & Entrepreneurship',
+    shortDescription: 'Launched innovative projects and explored entrepreneurial opportunities',
+    fullDescription: 'Began exploring entrepreneurial opportunities and launched innovative projects that addressed real-world problems. Developed business acumen alongside technical skills, creating solutions that demonstrated both technical excellence and market understanding.',
+    imageUrl: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
+    type: 'image',
+    color: 'bg-indigo-500'
+  },
+  {
+    id: 9,
     year: '2025',
-    title: 'Innovation Showcase',
-    shortDescription: 'Demonstrating cutting-edge technology',
-    fullDescription: 'Showcasing our latest innovations and breakthroughs in technology. This presentation highlights the future direction of our products and services, demonstrating our commitment to staying at the forefront of industry advancement.',
-    imageUrl: 'https://www.youtube.com/watch?v=UDGCL-_OLHo',
+    title: 'Cansbridge Fellowship Application',
+    shortDescription: 'Pursuing international opportunities and global impact',
+    fullDescription: 'Applied for the prestigious Cansbridge Fellowship, seeking to expand my horizons internationally and contribute to global innovation. This represents my commitment to continuous learning, cultural exchange, and making a meaningful impact on a global scale.',
+    imageUrl: 'https://www.youtube.com/watch?v=q27jHvFEjiA',
     type: 'youtube',
     color: 'bg-pink-500'
   }
