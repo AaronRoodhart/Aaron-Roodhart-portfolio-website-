@@ -264,199 +264,6 @@ const milestones: Milestone[] = [
   }
 ];
 
-// Custom hook for lazy loading
-const useLazyLoad = (threshold = 0.1) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { 
-        threshold,
-        rootMargin: '50px' // Start loading 50px before element is visible
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [threshold]);
-
-  return [ref, isVisible] as const;
-};
-
-// Lazy Image Component
-const LazyImage = ({ 
-  src, 
-  alt, 
-  className, 
-  placeholder = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDMyMCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSIjZjNmNGY2Ii8+Cjx0ZXh0IHg9IjE2MCIgeT0iOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5YTNhZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TG9hZGluZy4uLjwvdGV4dD4KPC9zdmc+"
-}: { 
-  src: string; 
-  alt: string; 
-  className?: string;
-  placeholder?: string;
-}) => {
-  const [ref, isVisible] = useLazyLoad();
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
-
-  return (
-    <div ref={ref} className="w-full h-full relative">
-      {isVisible && (
-        <img
-          src={src}
-          alt={alt}
-          className={`w-full h-full transition-opacity duration-300 ${className} ${
-            imageLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          onLoad={() => setImageLoaded(true)}
-          onError={() => setImageError(true)}
-          loading="lazy"
-        />
-      )}
-      {!isVisible && (
-        <div 
-          className={`w-full h-full bg-gray-200 flex items-center justify-center ${className}`}
-          style={{ backgroundImage: `url(${placeholder})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-        />
-      )}
-      {imageError && (
-        <div className={`w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 ${className}`}>
-          Failed to load image
-        </div>
-      )}
-    </div>
-  );
-};
-
-// Lazy Video Component
-const LazyVideo = ({ 
-  src, 
-  className, 
-  controls = true,
-  autoPlay = false,
-  muted = true,
-  loop = true,
-  playsInline = true
-}: { 
-  src: string; 
-  className?: string;
-  controls?: boolean;
-  autoPlay?: boolean;
-  muted?: boolean;
-  loop?: boolean;
-  playsInline?: boolean;
-}) => {
-  const [ref, isVisible] = useLazyLoad();
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
-  return (
-    <div ref={ref} className="w-full h-full relative">
-      {isVisible && (
-        <video
-          src={src}
-          className={`w-full h-full transition-opacity duration-300 ${className} ${
-            videoLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          controls={controls}
-          autoPlay={autoPlay}
-          muted={muted}
-          loop={loop}
-          playsInline={playsInline}
-          onLoadedData={() => setVideoLoaded(true)}
-          preload="metadata"
-        />
-      )}
-      {!isVisible && (
-        <div className={`w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 ${className}`}>
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500 mx-auto mb-2"></div>
-            <p>Loading video...</p>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-// Lazy YouTube Embed Component
-const LazyYouTubeEmbed = ({ 
-  url, 
-  title 
-}: { 
-  url: string; 
-  title: string;
-}) => {
-  const [ref, isVisible] = useLazyLoad();
-  const [embedLoaded, setEmbedLoaded] = useState(false);
-
-  const getYoutubeEmbedUrl = (url: string) => {
-    let videoId = '';
-
-    if (url.includes('youtube.com/watch?v=')) {
-      videoId = url.split('v=')[1]?.split('&')[0];
-    } else if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1]?.split('?')[0];
-    }
-
-    return `https://www.youtube-nocookie.com/embed/${videoId}`;
-  };
-
-  const getYoutubeThumbnail = (url: string) => {
-    let videoId = '';
-
-    if (url.includes('youtube.com/watch?v=')) {
-      videoId = url.split('v=')[1]?.split('&')[0];
-    } else if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1]?.split('?')[0];
-    }
-
-    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-  };
-
-  return (
-    <div ref={ref} className="w-full h-full relative">
-      {isVisible ? (
-        <iframe
-          src={getYoutubeEmbedUrl(url)}
-          className={`w-full h-full transition-opacity duration-300 ${
-            embedLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          onLoad={() => setEmbedLoaded(true)}
-        />
-      ) : (
-        <div className="w-full h-full bg-gray-200 flex items-center justify-center relative">
-          <img
-            src={getYoutubeThumbnail(url)}
-            alt={`${title} YouTube thumbnail`}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDMyMCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSIjZjNmNGY2Ii8+Cjx0ZXh0IHg9IjE2MCIgeT0iOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5YTNhZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TG9hZGluZy4uLjwvdGV4dD4KPC9zdmc+';
-            }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-red-600 rounded-full p-4 opacity-90 hover:opacity-100 transition-opacity duration-300">
-              <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
 
 function App() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -471,27 +278,8 @@ function App() {
     currentIndex: 0,
     title: ''
   });
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
   const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
-  // Preload only the first critical image for faster initial load
-  useEffect(() => {
-    const firstImage = milestones.find(milestone => milestone.type === 'image');
-    if (firstImage) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = firstImage.imageUrl;
-      document.head.appendChild(link);
-    }
-    
-    // Set page as loaded after a short delay to show loading state
-    const timer = setTimeout(() => {
-      setIsPageLoaded(true);
-    }, 100);
-    
-    return () => clearTimeout(timer);
-  }, []);
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -567,20 +355,6 @@ function App() {
   // Get years in chronological order (currently unused but kept for future functionality)
   // const years = Object.keys(groupedMilestones).sort();
 
-  // Show loading screen initially
-  if (!isPageLoaded) {
-    return (
-      <div className="min-h-screen text-white overflow-x-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Loading Portfolio...
-          </h2>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen text-white overflow-x-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900">
       <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
@@ -615,7 +389,7 @@ function App() {
                     >
                       <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
                         {milestone.type === 'image' ? (
-                          <LazyImage
+                          <img
                             src={milestone.imageUrl}
                             alt={milestone.title}
                             className={`w-full h-full hover:scale-110 transition-transform duration-500 ${
@@ -624,12 +398,14 @@ function App() {
                             }`}
                           />
                         ) : milestone.type === 'youtube' ? (
-                          <LazyYouTubeEmbed
-                            url={milestone.imageUrl}
-                            title={milestone.title}
+                          <iframe
+                            src={getYoutubeEmbedUrl(milestone.imageUrl)}
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
                           />
                         ) : (
-                          <LazyVideo
+                          <video
                             src={milestone.imageUrl}
                             className="w-full h-full object-cover"
                             controls
@@ -711,15 +487,13 @@ function App() {
                                           </div>
                                         </div>
                                       ) : isVideo ? (
-                                        <LazyVideo
+                                        <video
                                           src={mediaUrl}
                                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                          controls={false}
-                                          autoPlay={false}
                                           muted
                                         />
                                       ) : (
-                                        <LazyImage
+                                        <img
                                           src={mediaUrl}
                                           alt={`${milestone.title} gallery ${idx + 1}`}
                                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
