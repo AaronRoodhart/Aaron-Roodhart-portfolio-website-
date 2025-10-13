@@ -31,22 +31,22 @@ const milestones: Milestone[] = [
       '/4298327E-377B-4D54-8A1A-56697C2C9640.jpeg'
     ]
   },
-  {
-    id: 2,
-    year: '2020',
-    title: 'Assemblies Crew',
-    shortDescription: 'Redefining what a school assembly could be',
-    fullDescription: 'In grade 12, my friends Andy, Ethan, and I became our school\'s "Assembly Ministers." We produced entire cinematic storylines before every assembly, a four-part series complete with a Christmas special. It was chaotic, hilarious, and surprisingly impactful, bringing together hundreds of students with something to look forward to every month.',
-    imageUrl: '/assemblies-main.png',
-    type: 'image',
-    color: 'bg-green-500',
-    gallery: [
-      'https://youtu.be/wOVy9dmfSuM?si=m7eKJaOJZiDw9Kde',
-      'https://youtu.be/4_8DvywPuCA?si=XqtZXwluvY1Bk9wL',
-      'https://youtu.be/5JBq8jC-8-Y?si=ByF0HAeX9OHRD2Os',
-      'https://youtu.be/yIPuWSSmLfU?si=CxmtkyDgwowQP8Ll'
-    ]
-  },
+  // {
+  //   id: 2,
+  //   year: '2020',
+  //   title: 'Assemblies Crew',
+  //   shortDescription: 'Redefining what a school assembly could be',
+  //   fullDescription: 'In grade 12, my friends Andy, Ethan, and I became our school\'s "Assembly Ministers." We produced entire cinematic storylines before every assembly, a four-part series complete with a Christmas special. It was chaotic, hilarious, and surprisingly impactful, bringing together hundreds of students with something to look forward to every month.',
+  //   imageUrl: '/assemblies-main.png',
+  //   type: 'image',
+  //   color: 'bg-green-500',
+  //   gallery: [
+  //     'https://youtu.be/wOVy9dmfSuM?si=m7eKJaOJZiDw9Kde',
+  //     'https://youtu.be/4_8DvywPuCA?si=XqtZXwluvY1Bk9wL',
+  //     'https://youtu.be/5JBq8jC-8-Y?si=ByF0HAeX9OHRD2Os',
+  //     'https://youtu.be/yIPuWSSmLfU?si=CxmtkyDgwowQP8Ll'
+  //   ]
+  // },
   {
     id: 3,
     year: '2020',
