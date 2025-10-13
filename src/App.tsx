@@ -50,7 +50,7 @@ const milestones: Milestone[] = [
   {
     id: 3,
     year: '2020',
-    title: 'Second-Degree Black Belt',
+    title: 'Second Degree Black Belt',
     shortDescription: '10+ years of training',
     fullDescription: 'After more than a decade of kickboxing, I earned my second-degree black belt. The journey taught me so much more beyond technique. It built my discipline, mental toughness, and respect that the best things come with time. Since then, I\'ve continued to teach and support classes whenever I\'m back at my dojo and now teach at McMaster to new students coming into the sport.',
     imageUrl: '/Header Photo.png',
@@ -123,7 +123,7 @@ const milestones: Milestone[] = [
     year: '2022',
     title: 'Extracurricular Leadership at McMaster',
     shortDescription: 'Blending business and engineering',
-    fullDescription: 'In my second year, I became very involved on campus. From putting together a team of engineering and business students to participate in international competitions, to joining JDCC to strengthen my case competition skills, and becoming the first business member on McMaster Formula Electric, where I helped the team combine technical design with strategic business planning. It was an incredible year of learning that made me fall in love with the McMaster community.',
+    fullDescription: 'In my second year I became very involved on campus. From putting together a team of engineering and business students to participate in international competitions, to joining JDCC to strengthen my case competition skills, and becoming the first business member on McMaster Formula Electric, where I helped the team combine technical design with strategic business planning. It was an incredible year of learning that made me fall in love with the McMaster community.',
     imageUrl: '/mcmaster-main.png',
     type: 'image',
     color: 'bg-indigo-500',
@@ -138,7 +138,7 @@ const milestones: Milestone[] = [
     year: '2022',
     title: 'Custom Gifting Tradition',
     shortDescription: 'Turning gratitude into craftsmanship',
-    fullDescription: 'Starting in 2022, I began a yearly tradition of creating handmade blankets and paddles for people who had a big impact on me. I learned to sew custom blankets for close friends and carve wooden paddles for mentors, each one representing a shared adventure or lesson learned. It became my way of saying thank you in a very Aaron way, I guess.',
+    fullDescription: 'Starting in 2022 I began a yearly tradition of creating handmade blankets and paddles for people who had a big impact on me. I learned to sew custom blankets for close friends and carve wooden paddles for mentors, each one representing a shared adventure or lesson learned. It became my way of saying thank you in a very Aaron way, I guess.',
     imageUrl: '/custom-main.jpg',
     type: 'image',
     color: 'bg-pink-500',
@@ -187,7 +187,7 @@ const milestones: Milestone[] = [
     year: '2024',
     title: 'MARS Apprentice Revival',
     shortDescription: 'Bringing back a legacy',
-    fullDescription: 'MARS Apprentice was a historic 20-year-old business competition that once shaped the careers of hundreds of students and even sparked a few marriages. After COVID shut it down, I was asked if I would be interested in bringing it back. I couldn\'t say no. In just four months, I rebuilt the entire program from scratch, secured new sponsors, and helped launch a full semester-long season. The best part: a year later, a new team took what we built and tripled its size, proving the power of building something that lasts beyond you.',
+    fullDescription: 'MARS Apprentice was a historic 20 year old business competition that once shaped the careers of hundreds of students and even sparked a few marriages. After COVID shut it down, I was asked if I would be interested in bringing it back. I couldn\'t say no. In just four months, I rebuilt the entire program from scratch, secured new sponsors, and helped launch a full semester-long season. The best part: a year later, a new team took what we built and tripled its size, proving the power of building something that lasts beyond you.',
     imageUrl: '/mars-main.png',
     type: 'image',
     color: 'bg-rose-500',
@@ -252,16 +252,16 @@ const milestones: Milestone[] = [
       '/backpack-9.JPG'
     ]
   },
-  {
-    id: 16,
-    year: '2025',
-    title: 'Cansbridge Fellowship Application',
-    shortDescription: 'Pursuing international opportunities and global impact',
-    fullDescription: 'Applied for the prestigious Cansbridge Fellowship, seeking to expand my horizons internationally and contribute to global innovation. This represents my commitment to continuous learning, cultural exchange, and making a meaningful impact on a global scale.',
-    imageUrl: 'https://www.youtube.com/watch?v=q27jHvFEjiA',
-    type: 'youtube',
-    color: 'bg-fuchsia-500'
-  }
+  // {
+  //   id: 16,
+  //   year: '2025',
+  //   title: 'Cansbridge Fellowship Application',
+  //   shortDescription: 'Pursuing international opportunities and global impact',
+  //   fullDescription: 'Applied for the prestigious Cansbridge Fellowship, seeking to expand my horizons internationally and contribute to global innovation. This represents my commitment to continuous learning, cultural exchange, and making a meaningful impact on a global scale.',
+  //   imageUrl: 'https://www.youtube.com/watch?v=q27jHvFEjiA',
+  //   type: 'youtube',
+  //   color: 'bg-fuchsia-500'
+  // }
 ];
 
 
