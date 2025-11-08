@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Milestone {
@@ -9,7 +9,6 @@ interface Milestone {
   fullDescription: string;
   imageUrl: string;
   type: 'image' | 'video' | 'youtube';
-  color: string;
   link?: string;
   gallery?: string[];
   category: 'career' | 'projects' | 'cool stuff';
@@ -24,7 +23,6 @@ const milestones: Milestone[] = [
     fullDescription: 'Graduating in 2020 was anything but ordinary. After four incredible years, I couldn\'t stand the idea of just receiving our diplomas in the mail, so a few friends and I pitched an idea to our school board — a driveway graduation. Every student got their own personal ceremony right at home. It was pretty awesome getting to see how much it meant to my peers and their families and was the perfect way to say goodbye to our high school classmates and friends.',
     imageUrl: 'https://youtu.be/UTGcwufq_Jc?si=qoq_KWVwMuMXsjlz',
     type: 'youtube',
-    color: 'bg-blue-500',
     category: 'cool stuff',
     gallery: [
       '/IMG_1572.JPG',
@@ -33,22 +31,6 @@ const milestones: Milestone[] = [
       '/4298327E-377B-4D54-8A1A-56697C2C9640.jpeg'
     ]
   },
-  // {
-  //   id: 2,
-  //   year: '2020',
-  //   title: 'Assemblies Crew',
-  //   shortDescription: 'Redefining what a school assembly could be',
-  //   fullDescription: 'In grade 12, my friends Andy, Ethan, and I became our school\'s "Assembly Ministers." We produced entire cinematic storylines before every assembly, a four-part series complete with a Christmas special. It was chaotic, hilarious, and surprisingly impactful, bringing together hundreds of students with something to look forward to every month.',
-  //   imageUrl: '/assemblies-main.png',
-  //   type: 'image',
-  //   color: 'bg-green-500',
-  //   gallery: [
-  //     'https://youtu.be/wOVy9dmfSuM?si=m7eKJaOJZiDw9Kde',
-  //     'https://youtu.be/4_8DvywPuCA?si=XqtZXwluvY1Bk9wL',
-  //     'https://youtu.be/5JBq8jC-8-Y?si=ByF0HAeX9OHRD2Os',
-  //     'https://youtu.be/yIPuWSSmLfU?si=CxmtkyDgwowQP8Ll'
-  //   ]
-  // },
   {
     id: 3,
     year: '2020',
@@ -57,7 +39,6 @@ const milestones: Milestone[] = [
     fullDescription: 'After more than a decade of kickboxing, I earned my second-degree black belt. The journey taught me so much more beyond technique. It built my discipline, mental toughness, and respect that the best things come with time. Since then, I\'ve continued to teach and support classes whenever I\'m back at my dojo and now teach at McMaster to new students coming into the sport.',
     imageUrl: '/Header Photo.png',
     type: 'image',
-    color: 'bg-purple-500',
     category: 'cool stuff',
     gallery: [
       '/cm-chat-media-video-1_4e594edc-6233-5e4e-9efc-fef0483eba62_67_0_0.mov'
@@ -71,7 +52,6 @@ const milestones: Milestone[] = [
     fullDescription: 'For most of my young adult years, I worked as an outdoor educator at a camp called Gould Lake. I would take students on 1-3 week-long leadership trips across North America. As part of a charity initiative at Gould Lake, the staff completed an intense 162-kilometre paddle and 22-kilometre portage in just two days. Through constant rain, no sleep, and just a bit of hypothermia, we raised $10,000 to send kids to camp.',
     imageUrl: '/IMG_2458.JPG',
     type: 'image',
-    color: 'bg-orange-500',
     category: 'cool stuff',
     gallery: [
       '/IMG_3175.JPG',
@@ -86,7 +66,6 @@ const milestones: Milestone[] = [
     fullDescription: 'When COVID hit, I saw how much students were struggling. So, instead of heading straight to university, I took a gap year to start a tutoring business that blended academics with cognitive-behavioural therapy principles. It grew fast, with over 2,000 students helped, and a team of tutors helping students across Canada, becoming the foundation of my journey as an entrepreneur and educator.',
     imageUrl: '/Header Image.png',
     type: 'image',
-    color: 'bg-[#EFA013]',
     category: 'career'
   },
   {
@@ -97,7 +76,6 @@ const milestones: Milestone[] = [
     fullDescription: 'Over a year of volunteering, fitness, and skill development, I earned the Gold Duke of Edinburgh Award. From expeditions to residential projects at Queens University, it pushed me to grow as a leader, teammate, and individual. I also got a cool pin ;)',
     imageUrl: '/Main Image.jpg',
     type: 'image',
-    color: 'bg-cyan-500',
     category: 'cool stuff',
     gallery: [
       '/IMG_5982.JPG'
@@ -111,7 +89,6 @@ const milestones: Milestone[] = [
     fullDescription: 'I have always loved cameras since I got my first Sony Powershot when I was in grade 2, but it wasn\'t until I launched my own photography business in 2022 where I really fell in love with it. I taught myself Photoshop and Lightroom, refined my editing style, and started selling landscape prints from my travels. As someone who grew up in the outdoors and learned to appreciate the beauty and gifts the outdoors can give us, I fell in love with capturing that beauty and sharing it with others.',
     imageUrl: '/photography-main.png',
     type: 'image',
-    color: 'bg-emerald-500',
     category: 'projects',
     link: 'https://aaronroodhart20.pixieset.com/aaronportfolio/',
     gallery: [
@@ -133,7 +110,6 @@ const milestones: Milestone[] = [
     fullDescription: 'In my second year I became very involved on campus. From putting together a team of engineering and business students to participate in international competitions, to joining JDCC to strengthen my case competition skills, and becoming the first business member on McMaster Formula Electric, where I helped the team combine technical design with strategic business planning. It was an incredible year of learning that made me fall in love with the McMaster community.',
     imageUrl: '/mcmaster-main.png',
     type: 'image',
-    color: 'bg-indigo-500',
     category: 'career',
     gallery: [
       '/mcmaster-1.jpg',
@@ -149,7 +125,6 @@ const milestones: Milestone[] = [
     fullDescription: 'Starting in 2022 I began a yearly tradition of creating handmade blankets and paddles for people who had a big impact on me. I learned to sew custom blankets for close friends and carve wooden paddles for mentors, each one representing a shared adventure or lesson learned. It became my way of saying thank you in a very Aaron way, I guess.',
     imageUrl: '/custom-main.jpg',
     type: 'image',
-    color: 'bg-pink-500',
     category: 'cool stuff',
     gallery: [
       '/custom-1.jpg',
@@ -167,7 +142,6 @@ const milestones: Milestone[] = [
     fullDescription: 'After discovering 3D printing in an engineering design course, I became obsessed. I taught myself Fusion360 and Blender, started a small online store, and began designing props for franchises like Star Wars, The Legend of Zelda, and Catan. What started as a class project turned into a mini business and a lifelong maker hobby.',
     imageUrl: '/3d-main.JPG',
     type: 'image',
-    color: 'bg-yellow-500',
     category: 'projects',
     gallery: [
       '/3d-1.png',
@@ -185,7 +159,6 @@ const milestones: Milestone[] = [
     fullDescription: 'In our final year of university, my friend and I launched a show called Hot Takes, Cold Tanks as a fun project for the two of us to do. We trained to withstand the cold, filmed several episodes, and hosted backyard "premieres" for our neighbours. The show ended after our landlord saw the hydro bill, but it was a very fun project while it lasted and if anything I can now say I can be in an ice bath for over 10 minutes.',
     imageUrl: '/hot-takes-christmas.mp4',
     type: 'video',
-    color: 'bg-teal-500',
     category: 'projects',
     gallery: [
       '/hot-takes-1.png',
@@ -201,7 +174,6 @@ const milestones: Milestone[] = [
     fullDescription: 'MARS Apprentice was a historic 20 year old business competition that once shaped the careers of hundreds of students and even sparked a few marriages. After COVID shut it down, I was asked if I would be interested in bringing it back. I couldn\'t say no. In just four months, I rebuilt the entire program from scratch, secured new sponsors, and helped launch a full semester-long season. The best part: a year later, a new team took what we built and tripled its size, proving the power of building something that lasts beyond you.',
     imageUrl: '/mars-main.png',
     type: 'image',
-    color: 'bg-rose-500',
     category: 'career',
     gallery: [
       '/mars-1.png',
@@ -220,7 +192,6 @@ const milestones: Milestone[] = [
     fullDescription: 'In March 2025, I decided to take some time off school to work on some personal goals of mine, one of the biggest being to take part in a ten-day silent Vipassana meditation retreat. No verbal or non-verbal communication for 10 days, I wasn\'t even allowed to bring a notebook. I just spent 10 hours a day meditating. It was one of the hardest and most transformative experiences of my life. There were countless lessons, but I think one of the largest ones that ran true for me was to accept reality for how it is, not how you want it to be.',
     imageUrl: '/vipassana-main.JPG',
     type: 'image',
-    color: 'bg-violet-500',
     category: 'cool stuff'
   },
   {
@@ -231,7 +202,6 @@ const milestones: Milestone[] = [
     fullDescription: 'I\'ve journaled for over five years, but one problem always remained: I couldn\'t add my photos into my notebook. That led me to create DOT, a paper journal that connects physical pages to digital content using NFC technology. After 70+ user interviews, 23 prototypes, and 123 pre-MVP sales, I joined The Forge incubator and began developing the companion app. Launch coming soon 👀',
     imageUrl: '/dot-main.png',
     type: 'image',
-    color: 'bg-slate-500',
     category: 'career',
     link: 'https://dotbooks.ca',
     gallery: [
@@ -252,7 +222,6 @@ const milestones: Milestone[] = [
     fullDescription: 'Right after building DOT and completing my Vipassana retreat, I spent two months travelling through Hawaii, Japan, Vietnam, Cambodia, and Thailand. Backpacking across these places gave me so much perspective of life outside of the traditional Western and European perspectives. Seeing how so many live their lives in such different yet purposeful and intentional ways gave me a lot to think about as I came to the end of my university career and was the perfect reset. It was a reminder of how much there is to learn by simply exploring.',
     imageUrl: '/backpack-video.mov',
     type: 'video',
-    color: 'bg-amber-500',
     category: 'cool stuff',
     gallery: [
       '/backpack-main.png',
@@ -266,17 +235,7 @@ const milestones: Milestone[] = [
       '/backpack-8.JPG',
       '/backpack-9.JPG'
     ]
-  },
-  // {
-  //   id: 16,
-  //   year: '2025',
-  //   title: 'Cansbridge Fellowship Application',
-  //   shortDescription: 'Pursuing international opportunities and global impact',
-  //   fullDescription: 'Applied for the prestigious Cansbridge Fellowship, seeking to expand my horizons internationally and contribute to global innovation. This represents my commitment to continuous learning, cultural exchange, and making a meaningful impact on a global scale.',
-  //   imageUrl: 'https://www.youtube.com/watch?v=q27jHvFEjiA',
-  //   type: 'youtube',
-  //   color: 'bg-fuchsia-500'
-  // }
+  }
 ];
 
 
@@ -294,7 +253,6 @@ function App() {
     currentIndex: 0,
     title: ''
   });
-  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
 
   const toggleExpand = (id: number) => {
@@ -333,161 +291,76 @@ function App() {
     }));
   };
 
-  const getYoutubeEmbedUrl = (url: string) => {
-    let videoId = '';
-
+  const getYoutubeVideoId = (url: string): string => {
     if (url.includes('youtube.com/watch?v=')) {
-      videoId = url.split('v=')[1]?.split('&')[0];
+      return url.split('v=')[1]?.split('&')[0] || '';
     } else if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1]?.split('?')[0];
+      return url.split('youtu.be/')[1]?.split('?')[0] || '';
     }
+    return '';
+  };
 
+  const getYoutubeEmbedUrl = (url: string) => {
+    const videoId = getYoutubeVideoId(url);
     return `https://www.youtube-nocookie.com/embed/${videoId}`;
   };
 
   const getYoutubeThumbnail = (url: string) => {
-    let videoId = '';
-
-    if (url.includes('youtube.com/watch?v=')) {
-      videoId = url.split('v=')[1]?.split('&')[0];
-    } else if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1]?.split('?')[0];
-    }
-
+    const videoId = getYoutubeVideoId(url);
     return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   };
 
-
-  // Group milestones by year (currently unused but kept for future functionality)
-  // const groupedMilestones = milestones.reduce((acc, milestone) => {
-  //   const year = milestone.year;
-  //   if (!acc[year]) {
-  //     acc[year] = [];
-  //   }
-  //   acc[year].push(milestone);
-  //   return acc;
-  // }, {} as Record<string, Milestone[]>);
-
-  // Get years in chronological order (currently unused but kept for future functionality)
-  // const years = Object.keys(groupedMilestones).sort();
 
   // Filter milestones based on selected category
   const filteredMilestones = selectedFilter === 'all' 
     ? milestones 
     : milestones.filter(m => m.category === selectedFilter);
 
+  // Filter button configuration
+  const filterButtons = [
+    { id: 'all', label: 'All', color: '#298DEE', hoverColor: '#1a6bb8' },
+    { id: 'career', label: 'Career', color: '#298DEE', hoverColor: '#1a6bb8' },
+    { id: 'projects', label: 'Projects', color: '#FAB900', hoverColor: '#d9a000' },
+    { id: 'cool stuff', label: 'Cool stuff😎', color: '#F44F1B', hoverColor: '#d13e15' }
+  ] as const;
+
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F4F1EA' }}>
       <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4" style={{ color: '#1a1a1a' }}>
-          Hi Cansbridge 👋
+          Hi There.
         </h1>
         <p className="text-center mb-6 sm:mb-8 text-sm sm:text-base" style={{ color: '#666' }}>
-          Here are a few of my favorite projects, hobbies, and achievements I've worked on over the past few years.
+          My name's Aaron Roodhart. Below is a timeline of some of my favourite projects, hobbies, and achievements I've worked on over the past few years.
         </p>
 
         {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 lg:mb-16" style={{ minHeight: '40px' }}>
-          <button
-            onClick={() => setSelectedFilter('all')}
-            className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
-            style={{
-              backgroundColor: selectedFilter === 'all' ? '#298DEE' : '#FFFFFF',
-              color: selectedFilter === 'all' ? '#FFFFFF' : '#1a1a1a',
-              border: selectedFilter === 'all' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
-              boxShadow: selectedFilter === 'all' ? '0 2px 4px rgba(41, 141, 238, 0.2)' : 'none'
-            }}
-            onMouseEnter={(e) => {
-              if (selectedFilter !== 'all') {
-                e.currentTarget.style.backgroundColor = '#F9F9F9';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (selectedFilter !== 'all') {
-                e.currentTarget.style.backgroundColor = '#FFFFFF';
-              }
-            }}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setSelectedFilter('career')}
-            className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
-            style={{
-              backgroundColor: selectedFilter === 'career' ? '#298DEE' : '#FFFFFF',
-              color: selectedFilter === 'career' ? '#FFFFFF' : '#1a1a1a',
-              border: selectedFilter === 'career' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
-              boxShadow: selectedFilter === 'career' ? '0 2px 4px rgba(41, 141, 238, 0.2)' : 'none'
-            }}
-            onMouseEnter={(e) => {
-              if (selectedFilter !== 'career') {
-                e.currentTarget.style.backgroundColor = '#F9F9F9';
-              } else {
-                e.currentTarget.style.backgroundColor = '#1a6bb8';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (selectedFilter !== 'career') {
-                e.currentTarget.style.backgroundColor = '#FFFFFF';
-              } else {
-                e.currentTarget.style.backgroundColor = '#298DEE';
-              }
-            }}
-          >
-            Career
-          </button>
-          <button
-            onClick={() => setSelectedFilter('projects')}
-            className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
-            style={{
-              backgroundColor: selectedFilter === 'projects' ? '#FAB900' : '#FFFFFF',
-              color: selectedFilter === 'projects' ? '#FFFFFF' : '#1a1a1a',
-              border: selectedFilter === 'projects' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
-              boxShadow: selectedFilter === 'projects' ? '0 2px 4px rgba(250, 185, 0, 0.2)' : 'none'
-            }}
-            onMouseEnter={(e) => {
-              if (selectedFilter !== 'projects') {
-                e.currentTarget.style.backgroundColor = '#F9F9F9';
-              } else {
-                e.currentTarget.style.backgroundColor = '#d9a000';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (selectedFilter !== 'projects') {
-                e.currentTarget.style.backgroundColor = '#FFFFFF';
-              } else {
-                e.currentTarget.style.backgroundColor = '#FAB900';
-              }
-            }}
-          >
-            Projects
-          </button>
-          <button
-            onClick={() => setSelectedFilter('cool stuff')}
-            className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
-            style={{
-              backgroundColor: selectedFilter === 'cool stuff' ? '#F44F1B' : '#FFFFFF',
-              color: selectedFilter === 'cool stuff' ? '#FFFFFF' : '#1a1a1a',
-              border: selectedFilter === 'cool stuff' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
-              boxShadow: selectedFilter === 'cool stuff' ? '0 2px 4px rgba(244, 79, 27, 0.2)' : 'none'
-            }}
-            onMouseEnter={(e) => {
-              if (selectedFilter !== 'cool stuff') {
-                e.currentTarget.style.backgroundColor = '#F9F9F9';
-              } else {
-                e.currentTarget.style.backgroundColor = '#d13e15';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (selectedFilter !== 'cool stuff') {
-                e.currentTarget.style.backgroundColor = '#FFFFFF';
-              } else {
-                e.currentTarget.style.backgroundColor = '#F44F1B';
-              }
-            }}
-          >
-            Cool stuff😎
-          </button>
+          {filterButtons.map((filter) => {
+            const isActive = selectedFilter === filter.id;
+            const rgbaColor = filter.color.match(/\d+/g)?.map(Number) || [41, 141, 238];
+            return (
+              <button
+                key={filter.id}
+                onClick={() => setSelectedFilter(filter.id as typeof selectedFilter)}
+                className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
+                style={{
+                  backgroundColor: isActive ? filter.color : '#FFFFFF',
+                  color: isActive ? '#FFFFFF' : '#1a1a1a',
+                  border: isActive ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
+                  boxShadow: isActive ? `0 2px 4px rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, 0.2)` : 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = isActive ? filter.hoverColor : '#F9F9F9';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = isActive ? filter.color : '#FFFFFF';
+                }}
+              >
+                {filter.label}
+              </button>
+            );
+          })}
         </div>
 
         <div className="relative">
@@ -511,7 +384,6 @@ function App() {
                   <div className="hidden sm:block sm:w-1/2"></div>
                   <div className={`w-full sm:w-1/2 pl-12 ${index % 2 === 0 ? 'sm:pl-12' : 'sm:pr-12'}`}>
                     <div 
-                      ref={(el) => (cardRefs.current[milestone.id] = el)}
                       className="rounded-lg overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md"
                       style={{ backgroundColor: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)' }}
                     >

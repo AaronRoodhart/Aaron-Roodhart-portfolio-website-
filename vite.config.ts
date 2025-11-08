@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/aaron-roodhart-timeline/',
+  base: process.env.NODE_ENV === 'production' ? '/aaron-roodhart-timeline/' : '/',
   plugins: [react()],
   optimizeDeps: {
     include: ['react', 'react-dom'],
