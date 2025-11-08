@@ -242,6 +242,14 @@ const milestones: Milestone[] = [
 function App() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [selectedFilter, setSelectedFilter] = useState<'career' | 'projects' | 'cool stuff' | 'all'>('all');
+  
+  // Helper function to get the correct path for assets (handles base URL for GitHub Pages)
+  const getAssetPath = (path: string): string => {
+    if (path.startsWith('http') || path.startsWith('//')) {
+      return path; // External URLs
+    }
+    return `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+  };
   const [galleryModal, setGalleryModal] = useState<{
     isOpen: boolean;
     images: string[];
@@ -328,7 +336,7 @@ function App() {
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F4F1EA' }}>
       <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4" style={{ color: '#1a1a1a' }}>
-          Hi There.
+          Hi There 👋
         </h1>
         <p className="text-center mb-6 sm:mb-8 text-sm sm:text-base" style={{ color: '#666' }}>
           My name's Aaron Roodhart. Below is a timeline of some of my favourite projects, hobbies, and achievements I've worked on over the past few years.
@@ -390,7 +398,7 @@ function App() {
                       <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
                         {milestone.type === 'image' ? (
                           <img
-                            src={milestone.imageUrl}
+                            src={getAssetPath(milestone.imageUrl)}
                             alt={milestone.title}
                             className={`w-full h-full hover:scale-110 transition-transform duration-500 ${
                               milestone.title === 'Second Degree Black Belt' ? 'object-top object-cover' : 
@@ -406,7 +414,7 @@ function App() {
                           />
                         ) : (
                           <video
-                            src={milestone.imageUrl}
+                            src={getAssetPath(milestone.imageUrl)}
                             className="w-full h-full object-cover"
                             controls
                             autoPlay
@@ -474,7 +482,7 @@ function App() {
                                       {isYouTube ? (
                                         <div className="relative w-full h-full">
                                           <img
-                                            src={getYoutubeThumbnail(mediaUrl)}
+                                            src={getAssetPath(getYoutubeThumbnail(mediaUrl))}
                                             alt={`${milestone.title} YouTube video ${idx + 1}`}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                             onError={(e) => {
@@ -492,13 +500,13 @@ function App() {
                                         </div>
                                       ) : isVideo ? (
                                         <video
-                                          src={mediaUrl}
+                                          src={getAssetPath(mediaUrl)}
                                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                           muted
                                         />
                                       ) : (
                                         <img
-                                          src={mediaUrl}
+                                          src={getAssetPath(mediaUrl)}
                                           alt={`${milestone.title} gallery ${idx + 1}`}
                                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         />
@@ -623,7 +631,7 @@ function App() {
                 />
               ) : galleryModal.images[galleryModal.currentIndex].toLowerCase().match(/\.(mp4|mov|avi|webm)$/) ? (
                 <video
-                  src={galleryModal.images[galleryModal.currentIndex]}
+                  src={getAssetPath(galleryModal.images[galleryModal.currentIndex])}
                   controls
                   className="max-w-full max-h-full object-contain rounded-lg"
                   autoPlay
@@ -633,7 +641,7 @@ function App() {
                 </video>
               ) : (
                 <img
-                  src={galleryModal.images[galleryModal.currentIndex]}
+                  src={getAssetPath(galleryModal.images[galleryModal.currentIndex])}
                   alt={`${galleryModal.title} - Media ${galleryModal.currentIndex + 1}`}
                   className="max-w-full max-h-full object-contain rounded-lg"
                 />
