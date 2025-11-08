@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Project Timeline</title>
+    <meta name="description" content="Aaron Roodhart's portfolio showcasing projects, achievements, and experiences" />
+    <meta name="theme-color" content="#F4F1EA" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="data:application/octet-stream;base64,aW1wb3J0IHsgU3RyaWN0TW9kZSB9IGZyb20gJ3JlYWN0JzsKaW1wb3J0IHsgY3JlYXRlUm9vdCB9IGZyb20gJ3JlYWN0LWRvbS9jbGllbnQnOwppbXBvcnQgQXBwIGZyb20gJy4vQXBwLnRzeCc7CmltcG9ydCAnLi9pbmRleC5jc3MnOwoKY3JlYXRlUm9vdChkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncm9vdCcpISkucmVuZGVyKAogIDxTdHJpY3RNb2RlPgogICAgPEFwcCAvPgogIDwvU3RyaWN0TW9kZT4KKTsK" as="script" />
+    
+    <!-- Service Worker Registration (disabled in development) -->
+    <script>
+      if ('serviceWorker' in navigator && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      } else if ('serviceWorker' in navigator) {
+        // Unregister service worker in development
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+    </script>
+    <script type="module" crossorigin src="/Aaron-Roodhart-portfolio-website-/assets/index-CSElkoCZ.js"></script>
+    <link rel="modulepreload" crossorigin href="/Aaron-Roodhart-portfolio-website-/assets/vendor-YsBxPMQB.js">
+    <link rel="modulepreload" crossorigin href="/Aaron-Roodhart-portfolio-website-/assets/icons-d1s6tBGQ.js">
+    <link rel="stylesheet" crossorigin href="/Aaron-Roodhart-portfolio-website-/assets/index-DD4owLPf.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
