@@ -12,6 +12,7 @@ interface Milestone {
   color: string;
   link?: string;
   gallery?: string[];
+  category: 'career' | 'projects' | 'cool stuff';
 }
 
 const milestones: Milestone[] = [
@@ -24,6 +25,7 @@ const milestones: Milestone[] = [
     imageUrl: 'https://youtu.be/UTGcwufq_Jc?si=qoq_KWVwMuMXsjlz',
     type: 'youtube',
     color: 'bg-blue-500',
+    category: 'cool stuff',
     gallery: [
       '/IMG_1572.JPG',
       '/IMG_1873.JPG',
@@ -56,6 +58,7 @@ const milestones: Milestone[] = [
     imageUrl: '/Header Photo.png',
     type: 'image',
     color: 'bg-purple-500',
+    category: 'cool stuff',
     gallery: [
       '/cm-chat-media-video-1_4e594edc-6233-5e4e-9efc-fef0483eba62_67_0_0.mov'
     ]
@@ -69,6 +72,7 @@ const milestones: Milestone[] = [
     imageUrl: '/IMG_2458.JPG',
     type: 'image',
     color: 'bg-orange-500',
+    category: 'cool stuff',
     gallery: [
       '/IMG_3175.JPG',
       '/IMG_3177_Original.JPG'
@@ -82,7 +86,8 @@ const milestones: Milestone[] = [
     fullDescription: 'When COVID hit, I saw how much students were struggling. So, instead of heading straight to university, I took a gap year to start a tutoring business that blended academics with cognitive-behavioural therapy principles. It grew fast, with over 2,000 students helped, and a team of tutors helping students across Canada, becoming the foundation of my journey as an entrepreneur and educator.',
     imageUrl: '/Header Image.png',
     type: 'image',
-    color: 'bg-[#EFA013]'
+    color: 'bg-[#EFA013]',
+    category: 'career'
   },
   {
     id: 6,
@@ -93,6 +98,7 @@ const milestones: Milestone[] = [
     imageUrl: '/Main Image.jpg',
     type: 'image',
     color: 'bg-cyan-500',
+    category: 'cool stuff',
     gallery: [
       '/IMG_5982.JPG'
     ]
@@ -106,6 +112,7 @@ const milestones: Milestone[] = [
     imageUrl: '/photography-main.png',
     type: 'image',
     color: 'bg-emerald-500',
+    category: 'projects',
     link: 'https://aaronroodhart20.pixieset.com/aaronportfolio/',
     gallery: [
       '/photo1.png',
@@ -127,6 +134,7 @@ const milestones: Milestone[] = [
     imageUrl: '/mcmaster-main.png',
     type: 'image',
     color: 'bg-indigo-500',
+    category: 'career',
     gallery: [
       '/mcmaster-1.jpg',
       '/mcmaster-2.JPG',
@@ -142,6 +150,7 @@ const milestones: Milestone[] = [
     imageUrl: '/custom-main.jpg',
     type: 'image',
     color: 'bg-pink-500',
+    category: 'cool stuff',
     gallery: [
       '/custom-1.jpg',
       '/custom-2.JPG',
@@ -159,6 +168,7 @@ const milestones: Milestone[] = [
     imageUrl: '/3d-main.JPG',
     type: 'image',
     color: 'bg-yellow-500',
+    category: 'projects',
     gallery: [
       '/3d-1.png',
       '/3d-2.png',
@@ -176,6 +186,7 @@ const milestones: Milestone[] = [
     imageUrl: '/hot-takes-christmas.mp4',
     type: 'video',
     color: 'bg-teal-500',
+    category: 'projects',
     gallery: [
       '/hot-takes-1.png',
       '/hot-takes-2.png',
@@ -191,6 +202,7 @@ const milestones: Milestone[] = [
     imageUrl: '/mars-main.png',
     type: 'image',
     color: 'bg-rose-500',
+    category: 'career',
     gallery: [
       '/mars-1.png',
       '/mars-2.png',
@@ -208,7 +220,8 @@ const milestones: Milestone[] = [
     fullDescription: 'In March 2025, I decided to take some time off school to work on some personal goals of mine, one of the biggest being to take part in a ten-day silent Vipassana meditation retreat. No verbal or non-verbal communication for 10 days, I wasn\'t even allowed to bring a notebook. I just spent 10 hours a day meditating. It was one of the hardest and most transformative experiences of my life. There were countless lessons, but I think one of the largest ones that ran true for me was to accept reality for how it is, not how you want it to be.',
     imageUrl: '/vipassana-main.JPG',
     type: 'image',
-    color: 'bg-violet-500'
+    color: 'bg-violet-500',
+    category: 'cool stuff'
   },
   {
     id: 14,
@@ -219,6 +232,7 @@ const milestones: Milestone[] = [
     imageUrl: '/dot-main.png',
     type: 'image',
     color: 'bg-slate-500',
+    category: 'career',
     link: 'https://dotbooks.ca',
     gallery: [
       '/dot-1.jpeg',
@@ -239,6 +253,7 @@ const milestones: Milestone[] = [
     imageUrl: '/backpack-video.mov',
     type: 'video',
     color: 'bg-amber-500',
+    category: 'cool stuff',
     gallery: [
       '/backpack-main.png',
       '/backpack-1.jpeg',
@@ -267,6 +282,7 @@ const milestones: Milestone[] = [
 
 function App() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [selectedFilter, setSelectedFilter] = useState<'career' | 'projects' | 'cool stuff' | 'all'>('all');
   const [galleryModal, setGalleryModal] = useState<{
     isOpen: boolean;
     images: string[];
@@ -355,21 +371,132 @@ function App() {
   // Get years in chronological order (currently unused but kept for future functionality)
   // const years = Object.keys(groupedMilestones).sort();
 
+  // Filter milestones based on selected category
+  const filteredMilestones = selectedFilter === 'all' 
+    ? milestones 
+    : milestones.filter(m => m.category === selectedFilter);
+
   return (
-    <div className="min-h-screen text-white overflow-x-hidden bg-gradient-to-br from-black via-gray-900 to-blue-900">
+    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F4F1EA' }}>
       <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4 text-white">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4" style={{ color: '#1a1a1a' }}>
           Hi Cansbridge 👋
         </h1>
-        <p className="text-center text-gray-400 mb-8 sm:mb-12 lg:mb-16 text-sm sm:text-base">
+        <p className="text-center mb-6 sm:mb-8 text-sm sm:text-base" style={{ color: '#666' }}>
           Here are a few of my favorite projects, hobbies, and achievements I've worked on over the past few years.
         </p>
 
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 lg:mb-16" style={{ minHeight: '40px' }}>
+          <button
+            onClick={() => setSelectedFilter('all')}
+            className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
+            style={{
+              backgroundColor: selectedFilter === 'all' ? '#298DEE' : '#FFFFFF',
+              color: selectedFilter === 'all' ? '#FFFFFF' : '#1a1a1a',
+              border: selectedFilter === 'all' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
+              boxShadow: selectedFilter === 'all' ? '0 2px 4px rgba(41, 141, 238, 0.2)' : 'none'
+            }}
+            onMouseEnter={(e) => {
+              if (selectedFilter !== 'all') {
+                e.currentTarget.style.backgroundColor = '#F9F9F9';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedFilter !== 'all') {
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
+              }
+            }}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setSelectedFilter('career')}
+            className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
+            style={{
+              backgroundColor: selectedFilter === 'career' ? '#298DEE' : '#FFFFFF',
+              color: selectedFilter === 'career' ? '#FFFFFF' : '#1a1a1a',
+              border: selectedFilter === 'career' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
+              boxShadow: selectedFilter === 'career' ? '0 2px 4px rgba(41, 141, 238, 0.2)' : 'none'
+            }}
+            onMouseEnter={(e) => {
+              if (selectedFilter !== 'career') {
+                e.currentTarget.style.backgroundColor = '#F9F9F9';
+              } else {
+                e.currentTarget.style.backgroundColor = '#1a6bb8';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedFilter !== 'career') {
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
+              } else {
+                e.currentTarget.style.backgroundColor = '#298DEE';
+              }
+            }}
+          >
+            Career
+          </button>
+          <button
+            onClick={() => setSelectedFilter('projects')}
+            className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
+            style={{
+              backgroundColor: selectedFilter === 'projects' ? '#FAB900' : '#FFFFFF',
+              color: selectedFilter === 'projects' ? '#FFFFFF' : '#1a1a1a',
+              border: selectedFilter === 'projects' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
+              boxShadow: selectedFilter === 'projects' ? '0 2px 4px rgba(250, 185, 0, 0.2)' : 'none'
+            }}
+            onMouseEnter={(e) => {
+              if (selectedFilter !== 'projects') {
+                e.currentTarget.style.backgroundColor = '#F9F9F9';
+              } else {
+                e.currentTarget.style.backgroundColor = '#d9a000';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedFilter !== 'projects') {
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
+              } else {
+                e.currentTarget.style.backgroundColor = '#FAB900';
+              }
+            }}
+          >
+            Projects
+          </button>
+          <button
+            onClick={() => setSelectedFilter('cool stuff')}
+            className="px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-200"
+            style={{
+              backgroundColor: selectedFilter === 'cool stuff' ? '#F44F1B' : '#FFFFFF',
+              color: selectedFilter === 'cool stuff' ? '#FFFFFF' : '#1a1a1a',
+              border: selectedFilter === 'cool stuff' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)',
+              boxShadow: selectedFilter === 'cool stuff' ? '0 2px 4px rgba(244, 79, 27, 0.2)' : 'none'
+            }}
+            onMouseEnter={(e) => {
+              if (selectedFilter !== 'cool stuff') {
+                e.currentTarget.style.backgroundColor = '#F9F9F9';
+              } else {
+                e.currentTarget.style.backgroundColor = '#d13e15';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedFilter !== 'cool stuff') {
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
+              } else {
+                e.currentTarget.style.backgroundColor = '#F44F1B';
+              }
+            }}
+          >
+            Cool stuff😎
+          </button>
+        </div>
+
         <div className="relative">
-          <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-1 bg-blue-500" style={{ height: 'calc(100% - 120px)' }}></div>
+          <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-1" style={{ height: 'calc(100% - 120px)', backgroundColor: '#298DEE', opacity: 0.3 }}></div>
 
           <div className="space-y-8 sm:space-y-12 lg:space-y-16">
-            {milestones.map((milestone, index) => (
+            {filteredMilestones.map((milestone, index) => {
+              const originalIndex = milestones.findIndex(m => m.id === milestone.id);
+              return (
               <div
                 key={milestone.id}
                 className="relative"
@@ -378,14 +505,15 @@ function App() {
                   animation: `fadeInUp 0.6s ease-out ${index * 0.2}s forwards`
                 }}
               >
-                <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-4 h-4 sm:w-6 sm:h-6 bg-blue-500 rounded-full border-2 sm:border-4 border-black z-10 hover:scale-125 transition-transform duration-300 shadow-lg shadow-blue-500/50"></div>
+                <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-4 h-4 sm:w-6 sm:h-6 rounded-full border-2 sm:border-4 z-10 hover:scale-125 transition-transform duration-300 shadow-lg" style={{ backgroundColor: originalIndex % 3 === 0 ? '#298DEE' : originalIndex % 3 === 1 ? '#FAB900' : '#F44F1B', borderColor: '#F4F1EA' }}></div>
 
                 <div className={`flex items-center ${index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
                   <div className="hidden sm:block sm:w-1/2"></div>
                   <div className={`w-full sm:w-1/2 pl-12 ${index % 2 === 0 ? 'sm:pl-12' : 'sm:pr-12'}`}>
                     <div 
                       ref={(el) => (cardRefs.current[milestone.id] = el)}
-                      className="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-blue-500 transition-all duration-300 shadow-xl"
+                      className="rounded-lg overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md"
+                      style={{ backgroundColor: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)' }}
                     >
                       <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
                         {milestone.type === 'image' ? (
@@ -415,14 +543,14 @@ function App() {
                             playsInline
                           />
                         )}
-                        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-bold shadow-lg">
+                        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-bold shadow-sm" style={{ backgroundColor: originalIndex % 3 === 0 ? '#298DEE' : originalIndex % 3 === 1 ? '#FAB900' : '#F44F1B' }}>
                           {milestone.year}
                         </div>
                       </div>
 
                       <div className="p-4 sm:p-6">
                         <div className="mb-2">
-                          <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                          <h3 className="text-xl sm:text-2xl font-bold mb-2" style={{ color: '#1a1a1a' }}>
                             {milestone.title}
                           </h3>
                           {milestone.link && (
@@ -431,7 +559,10 @@ function App() {
                                 href={milestone.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium text-sm"
+                                className="inline-flex items-center gap-2 transition-colors duration-200 font-medium text-sm"
+                                style={{ color: '#298DEE' }}
+                                onMouseEnter={(e) => e.currentTarget.style.color = '#1a6bb8'}
+                                onMouseLeave={(e) => e.currentTarget.style.color = '#298DEE'}
                                 title="Visit website"
                               >
                                 <span>🔗</span>
@@ -441,7 +572,7 @@ function App() {
                             </div>
                           )}
                         </div>
-                        <p className="text-gray-300 mb-4 text-sm sm:text-base">
+                        <p className="mb-4 text-sm sm:text-base" style={{ color: '#666' }}>
                           {milestone.shortDescription}
                         </p>
 
@@ -450,7 +581,7 @@ function App() {
                             expandedId === milestone.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
                           }`}
                         >
-                          <p className="text-gray-400 mb-4 leading-relaxed text-sm sm:text-base">
+                          <p className="mb-4 leading-relaxed text-sm sm:text-base" style={{ color: '#555' }}>
                             {milestone.fullDescription}
                           </p>
 
@@ -464,7 +595,8 @@ function App() {
                                   return (
                                     <div
                                       key={idx}
-                                      className="relative aspect-square rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-300 group cursor-pointer"
+                                      className="relative aspect-square rounded-lg overflow-hidden transition-all duration-300 group cursor-pointer"
+                                      style={{ border: '1px solid rgba(0, 0, 0, 0.08)' }}
                                       onClick={() => openGallery(milestone.gallery!, milestone.title, idx)}
                                     >
                                       {isYouTube ? (
@@ -499,19 +631,19 @@ function App() {
                                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         />
                                       )}
-                                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                                      <div className="absolute inset-0 transition-all duration-300 flex items-center justify-center" style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0)'}>
                                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                          <div className="bg-white bg-opacity-20 rounded-full p-2">
+                                          <div className="rounded-full p-2" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
                                             {isYouTube ? (
-                                              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                              <svg className="w-6 h-6" style={{ color: '#298DEE' }} fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                                               </svg>
                                             ) : isVideo ? (
-                                              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                              <svg className="w-6 h-6" style={{ color: '#298DEE' }} fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M8 5v14l11-7z"/>
                                               </svg>
                                             ) : (
-                                              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <svg className="w-6 h-6" style={{ color: '#298DEE' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                                               </svg>
                                             )}
@@ -528,7 +660,16 @@ function App() {
 
                         <button
                           onClick={() => toggleExpand(milestone.id)}
-                          className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base shadow-lg hover:shadow-xl transform hover:scale-105"
+                          className="flex items-center gap-2 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base shadow-sm hover:shadow-md transform hover:scale-105"
+                          style={{ backgroundColor: originalIndex % 3 === 0 ? '#298DEE' : originalIndex % 3 === 1 ? '#FAB900' : '#F44F1B' }}
+                          onMouseEnter={(e) => {
+                            const colors = originalIndex % 3 === 0 ? ['#298DEE', '#1a6bb8'] : originalIndex % 3 === 1 ? ['#FAB900', '#d9a000'] : ['#F44F1B', '#d13e15'];
+                            e.currentTarget.style.backgroundColor = colors[1];
+                          }}
+                          onMouseLeave={(e) => {
+                            const colors = originalIndex % 3 === 0 ? '#298DEE' : originalIndex % 3 === 1 ? '#FAB900' : '#F44F1B';
+                            e.currentTarget.style.backgroundColor = colors;
+                          }}
                         >
                           {expandedId === milestone.id ? (
                             <>
@@ -547,12 +688,13 @@ function App() {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
           
           {/* To be continued message */}
           <div className="text-center mt-20 mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold" style={{ color: '#1a1a1a' }}>
               To be continued...
             </h2>
           </div>
@@ -561,12 +703,15 @@ function App() {
 
       {/* Gallery Modal */}
       {galleryModal.isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
           <div className="relative w-full h-full max-w-6xl max-h-full flex items-center justify-center">
             {/* Close Button */}
             <button
               onClick={closeGallery}
-              className="absolute top-4 right-4 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full p-2 transition-all duration-200"
+              className="absolute top-4 right-4 z-10 text-white rounded-full p-2 transition-all duration-200"
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'}
             >
               <X size={24} />
             </button>
@@ -576,13 +721,19 @@ function App() {
               <>
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full p-3 transition-all duration-200"
+                  className="absolute left-4 z-10 text-white rounded-full p-3 transition-all duration-200"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'}
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full p-3 transition-all duration-200"
+                  className="absolute right-4 z-10 text-white rounded-full p-3 transition-all duration-200"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'}
                 >
                   <ChevronRight size={24} />
                 </button>
@@ -619,13 +770,13 @@ function App() {
 
             {/* Image Counter */}
             {galleryModal.images.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full text-sm">
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white px-4 py-2 rounded-full text-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' }}>
                 {galleryModal.currentIndex + 1} / {galleryModal.images.length}
               </div>
             )}
 
             {/* Title */}
-            <div className="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg text-sm">
+            <div className="absolute top-4 left-4 text-white px-4 py-2 rounded-lg text-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' }}>
               {galleryModal.title}
             </div>
           </div>
