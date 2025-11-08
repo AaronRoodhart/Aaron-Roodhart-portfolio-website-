@@ -458,7 +458,7 @@ function App() {
         }
       `}</style>
       <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F4F1EA' }}>
-        <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-12 lg:py-16">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4" style={{ color: '#1a1a1a' }}>
           Hi There 👋
         </h1>
@@ -571,9 +571,12 @@ function App() {
         </div>
 
         <div className="relative">
-          <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-1" style={{ height: 'calc(100% - 120px)', backgroundColor: '#298DEE', opacity: 0.3 }}></div>
+          {/* Timeline line - hidden on mobile, visible on desktop */}
+          <div className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 w-1" style={{ height: 'calc(100% - 120px)', backgroundColor: '#298DEE', opacity: 0.3 }}></div>
+          {/* Mobile timeline line */}
+          <div className="sm:hidden absolute left-4 w-0.5" style={{ height: 'calc(100% - 80px)', backgroundColor: '#298DEE', opacity: 0.3 }}></div>
 
-          <div className="space-y-8 sm:space-y-12 lg:space-y-16">
+          <div className="space-y-6 sm:space-y-12 lg:space-y-16">
             {filteredMilestones.map((milestone, index) => {
               const originalIndex = milestones.findIndex(m => m.id === milestone.id);
               return (
@@ -585,16 +588,18 @@ function App() {
                   animation: `fadeInUp 0.6s ease-out ${index * 0.2}s forwards`
                 }}
               >
-                <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-4 h-4 sm:w-6 sm:h-6 rounded-full border-2 sm:border-4 z-10 hover:scale-125 transition-transform duration-300 shadow-lg" style={{ backgroundColor: originalIndex % 3 === 0 ? '#298DEE' : originalIndex % 3 === 1 ? '#FAB900' : '#F44F1B', borderColor: '#F4F1EA' }}></div>
+                {/* Timeline dot - positioned for mobile and desktop */}
+                <div className="absolute left-2 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 sm:border-4 z-10 hover:scale-125 transition-transform duration-300 shadow-lg" style={{ backgroundColor: originalIndex % 3 === 0 ? '#298DEE' : originalIndex % 3 === 1 ? '#FAB900' : '#F44F1B', borderColor: '#F4F1EA', top: '0.5rem' }}></div>
 
-                <div className={`flex items-center ${index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
+                {/* Card container - all cards on left for mobile, alternating for desktop */}
+                <div className={`flex items-start ${index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
                   <div className="hidden sm:block sm:w-1/2"></div>
-                  <div className={`w-full sm:w-1/2 pl-12 ${index % 2 === 0 ? 'sm:pl-12' : 'sm:pr-12'}`}>
+                  <div className={`w-full sm:w-1/2 pl-10 sm:pl-12 ${index % 2 === 0 ? 'sm:pl-12' : 'sm:pr-12'}`}>
                     <div 
                       className="rounded-lg overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md"
                       style={{ backgroundColor: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.08)' }}
                     >
-                      <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
+                      <div className="relative h-48 sm:h-48 lg:h-56 overflow-hidden">
                         {milestone.type === 'image' ? (
                           <img
                             src={getAssetPath(milestone.imageUrl)}
@@ -629,7 +634,7 @@ function App() {
 
                       <div className="p-4 sm:p-6">
                         <div className="mb-2">
-                          <h3 className="text-xl sm:text-2xl font-bold mb-2" style={{ color: '#1a1a1a' }}>
+                          <h3 className="text-lg sm:text-2xl font-bold mb-2" style={{ color: '#1a1a1a' }}>
                             {milestone.title}
                           </h3>
                           {milestone.link && (
@@ -666,7 +671,7 @@ function App() {
 
                           {milestone.gallery && milestone.gallery.length > 0 && (
                             <div className="mt-4">
-                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 -mx-1 sm:mx-0">
                                 {milestone.gallery.map((mediaUrl, idx) => {
                                   const isVideo = mediaUrl.toLowerCase().match(/\.(mp4|mov|avi|webm)$/);
                                   const isYouTube = mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be');
