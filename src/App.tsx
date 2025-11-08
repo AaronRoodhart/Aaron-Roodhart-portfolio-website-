@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Milestone {
@@ -243,6 +243,84 @@ function App() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [selectedFilter, setSelectedFilter] = useState<'career' | 'projects' | 'cool stuff' | 'all'>('all');
   
+  // Extract years from milestones and determine range
+  const extractYear = (yearString: string): number => {
+    // Handle ranges like "2021–2022" by taking the first year
+    const firstYear = yearString.split('–')[0].split('-')[0].trim();
+    return parseInt(firstYear, 10);
+  };
+  
+  const allYears = milestones.map(m => extractYear(m.year));
+  const minYear = Math.min(...allYears);
+  const maxYear = Math.max(...allYears);
+  
+  const [yearRange, setYearRange] = useState<[number, number]>([minYear, maxYear]);
+  const [activeHandle, setActiveHandle] = useState<'start' | 'end' | null>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
+  
+  const getYearFromPosition = (clientX: number): number => {
+    if (!sliderRef.current) return minYear;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const percentage = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    return Math.round(minYear + (maxYear - minYear) * percentage);
+  };
+  
+  const handleMouseDown = (handle: 'start' | 'end', e: React.MouseEvent) => {
+    e.preventDefault();
+    setActiveHandle(handle);
+    isDraggingRef.current = true;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDraggingRef.current) return;
+      const newYear = getYearFromPosition(e.clientX);
+      
+      if (handle === 'start') {
+        if (newYear <= yearRange[1]) {
+          setYearRange([newYear, yearRange[1]]);
+        }
+      } else {
+        if (newYear >= yearRange[0]) {
+          setYearRange([yearRange[0], newYear]);
+        }
+      }
+    };
+    
+    const handleMouseUp = () => {
+      isDraggingRef.current = false;
+      setActiveHandle(null);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+  
+  const handleSliderClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Only handle clicks on the track, not on handles
+    if ((e.target as HTMLElement).classList.contains('slider-handle')) return;
+    
+    const clickedYear = getYearFromPosition(e.clientX);
+    const startPos = (yearRange[0] - minYear) / (maxYear - minYear);
+    const endPos = (yearRange[1] - minYear) / (maxYear - minYear);
+    const clickPos = (clickedYear - minYear) / (maxYear - minYear);
+    const startDistance = Math.abs(clickPos - startPos);
+    const endDistance = Math.abs(clickPos - endPos);
+    
+    if (startDistance < endDistance) {
+      // Closer to start handle
+      if (clickedYear <= yearRange[1]) {
+        setYearRange([clickedYear, yearRange[1]]);
+      }
+    } else {
+      // Closer to end handle
+      if (clickedYear >= yearRange[0]) {
+        setYearRange([yearRange[0], clickedYear]);
+      }
+    }
+  };
+  
   // Helper function to get the correct path for assets (handles base URL for GitHub Pages)
   const getAssetPath = (path: string): string => {
     if (path.startsWith('http') || path.startsWith('//')) {
@@ -319,22 +397,68 @@ function App() {
   };
 
 
-  // Filter milestones based on selected category
-  const filteredMilestones = selectedFilter === 'all' 
-    ? milestones 
-    : milestones.filter(m => m.category === selectedFilter);
+  // Filter milestones based on selected category and year range
+  const filteredMilestones = milestones.filter(m => {
+    // Category filter
+    const matchesCategory = selectedFilter === 'all' || m.category === selectedFilter;
+    
+    // Year range filter
+    const milestoneYear = extractYear(m.year);
+    const matchesYearRange = milestoneYear >= yearRange[0] && milestoneYear <= yearRange[1];
+    
+    return matchesCategory && matchesYearRange;
+  });
 
   // Filter button configuration
   const filterButtons = [
-    { id: 'all', label: 'All', color: '#298DEE', hoverColor: '#1a6bb8' },
+    { id: 'all', label: 'All', color: '#4CAF50', hoverColor: '#45a049' },
     { id: 'career', label: 'Career', color: '#298DEE', hoverColor: '#1a6bb8' },
     { id: 'projects', label: 'Projects', color: '#FAB900', hoverColor: '#d9a000' },
     { id: 'cool stuff', label: 'Cool stuff😎', color: '#F44F1B', hoverColor: '#d13e15' }
   ] as const;
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F4F1EA' }}>
-      <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
+    <>
+      <style>{`
+        input[type="range"] {
+          -webkit-appearance: none;
+          appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: transparent;
+          cursor: grab;
+          border: none;
+        }
+        input[type="range"]:active::-webkit-slider-thumb {
+          cursor: grabbing;
+        }
+        input[type="range"]::-moz-range-thumb {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: transparent;
+          cursor: grab;
+          border: none;
+        }
+        input[type="range"]:active::-moz-range-thumb {
+          cursor: grabbing;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+          background: transparent;
+          height: 2px;
+        }
+        input[type="range"]::-moz-range-track {
+          background: transparent;
+          height: 2px;
+        }
+      `}</style>
+      <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F4F1EA' }}>
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 lg:py-16">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4" style={{ color: '#1a1a1a' }}>
           Hi There 👋
         </h1>
@@ -343,7 +467,7 @@ function App() {
         </p>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 lg:mb-16" style={{ minHeight: '40px' }}>
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8" style={{ minHeight: '40px' }}>
           {filterButtons.map((filter) => {
             const isActive = selectedFilter === filter.id;
             const rgbaColor = filter.color.match(/\d+/g)?.map(Number) || [41, 141, 238];
@@ -369,6 +493,81 @@ function App() {
               </button>
             );
           })}
+        </div>
+
+        {/* Year Range Slider */}
+        <div className="mb-8 sm:mb-12 lg:mb-16 px-2 sm:px-4">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm sm:text-base font-medium" style={{ color: '#1a1a1a' }}>
+              {yearRange[0]}
+            </span>
+            <span className="text-xs sm:text-sm font-medium" style={{ color: '#666' }}>
+              Year Range
+            </span>
+            <span className="text-sm sm:text-base font-medium" style={{ color: '#1a1a1a' }}>
+              {yearRange[1]}
+            </span>
+          </div>
+          <div 
+            ref={sliderRef}
+            className="relative" 
+            style={{ height: '50px', paddingTop: '15px' }}
+            onClick={handleSliderClick}
+          >
+            {/* Track Background */}
+            <div 
+              className="absolute top-1/2 left-0 right-0 h-2 rounded-full"
+              style={{ 
+                backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                transform: 'translateY(-50%)'
+              }}
+            />
+            {/* Active Range */}
+            <div 
+              className="absolute top-1/2 h-2 rounded-full"
+              style={{ 
+                backgroundColor: '#298DEE',
+                left: `${((yearRange[0] - minYear) / (maxYear - minYear)) * 100}%`,
+                width: `${((yearRange[1] - yearRange[0]) / (maxYear - minYear)) * 100}%`,
+                transform: 'translateY(-50%)',
+                transition: activeHandle ? 'none' : 'all 0.2s ease'
+              }}
+            />
+            {/* Start Handle */}
+            <div
+              className="slider-handle absolute top-1/2 rounded-full border-2 transition-all cursor-grab active:cursor-grabbing"
+              style={{
+                backgroundColor: '#298DEE',
+                borderColor: '#FFFFFF',
+                left: `calc(${((yearRange[0] - minYear) / (maxYear - minYear)) * 100}% - 12px)`,
+                transform: `translateY(-50%) scale(${activeHandle === 'start' ? 1.3 : 1})`,
+                width: activeHandle === 'start' ? '28px' : '24px',
+                height: activeHandle === 'start' ? '28px' : '24px',
+                boxShadow: activeHandle === 'start' 
+                  ? '0 4px 12px rgba(41, 141, 238, 0.6)' 
+                  : '0 2px 6px rgba(41, 141, 238, 0.4)',
+                zIndex: 30
+              }}
+              onMouseDown={(e) => handleMouseDown('start', e)}
+            />
+            {/* End Handle */}
+            <div
+              className="slider-handle absolute top-1/2 rounded-full border-2 transition-all cursor-grab active:cursor-grabbing"
+              style={{
+                backgroundColor: '#298DEE',
+                borderColor: '#FFFFFF',
+                left: `calc(${((yearRange[1] - minYear) / (maxYear - minYear)) * 100}% - 12px)`,
+                transform: `translateY(-50%) scale(${activeHandle === 'end' ? 1.3 : 1})`,
+                width: activeHandle === 'end' ? '28px' : '24px',
+                height: activeHandle === 'end' ? '28px' : '24px',
+                boxShadow: activeHandle === 'end' 
+                  ? '0 4px 12px rgba(41, 141, 238, 0.6)' 
+                  : '0 2px 6px rgba(41, 141, 238, 0.4)',
+                zIndex: 30
+              }}
+              onMouseDown={(e) => handleMouseDown('end', e)}
+            />
+          </div>
         </div>
 
         <div className="relative">
@@ -676,6 +875,7 @@ function App() {
         }
       `}</style>
     </div>
+    </>
   );
 }
 
